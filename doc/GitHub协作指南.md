@@ -30,6 +30,7 @@ user.email "xu_zhihao@outlook.com"
 ```powershell
 ssh-keygen -t ed25519 -C "你的GitHub邮箱@example.com"
 ```
+bash同理
 
 一路回车，密钥保存在 `C:\Users\你的用户名\.ssh\id_ed25519`。
 
