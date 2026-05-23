@@ -1,4 +1,23 @@
 # GitHub SSH 连接与多人协作指南
+##  此文档的作用是为了快速在本地建立git工作流程方便后续开发的方便。文件中记录了我如何使用ssh协议连接github和已经解决的问题（clashverge抢占端口）文档中同时给出了一些常见的git命令。后续我会继续整理出一个更简单的txt命令文件方便直接复制粘贴。
+
+
+#   用户清单
+### xuzhihao
+user.name "xuzhihao-248"
+user.email "xu_zhihao@outlook.com"
+
+#   快速配置清单
+
+| 步骤 | 命令 |
+|------|------|
+| 1. 生成密钥 | `ssh-keygen -t ed25519 -C "邮箱"` |
+| 2. 复制公钥 | `Get-Content ~\.ssh\id_ed25519.pub \| Set-Clipboard` |
+| 3. 添加到 GitHub | 打开 github.com/settings/keys 粘贴 |
+| 4. 检查 Clash 冲突 | `nslookup github.com` 看是否返回 `198.18.x.x` |
+| 5. 如有冲突，配置 SSH | 创建 `~\.ssh\config` 走 443 端口（见第三章） |
+| 6. 测试连接 | `ssh -T git@github.com` |
+| 7. 克隆仓库 | `git clone git@github.com:用户名/仓库名.git` |
 
 ## 一、初次配置：SSH 连接 GitHub
 
@@ -32,7 +51,7 @@ ssh -T git@github.com
 
 ---
 
-## 二、判断 Clash Verge 是否与 GitHub 端口冲突
+## 二、判断 Clash Verge 是否与 GitHub 端口冲突（这个是我真实遇到的问题，我的pc和mac都遇到了端口被clashverge抢占的问题——已解决）
 
 ### 测试：查看 GitHub 解析的 IP
 
@@ -146,14 +165,4 @@ git pull origin main
 
 ---
 
-## 七、给队友的快速配置清单
 
-| 步骤 | 命令 |
-|------|------|
-| 1. 生成密钥 | `ssh-keygen -t ed25519 -C "邮箱"` |
-| 2. 复制公钥 | `Get-Content ~\.ssh\id_ed25519.pub \| Set-Clipboard` |
-| 3. 添加到 GitHub | 打开 github.com/settings/keys 粘贴 |
-| 4. 检查 Clash 冲突 | `nslookup github.com` 看是否返回 `198.18.x.x` |
-| 5. 如有冲突，配置 SSH | 创建 `~\.ssh\config` 走 443 端口（见第三章） |
-| 6. 测试连接 | `ssh -T git@github.com` |
-| 7. 克隆仓库 | `git clone git@github.com:用户名/仓库名.git` |
