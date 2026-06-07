@@ -1,7 +1,30 @@
 # GitHub SSH 连接与多人协作指南
-##  此文档的作用是为了快速在本地建立git工作流程方便后续开发。文件中记录了我如何使用ssh协议连接github和已经解决的问题（clashverge抢占端口）文档中同时给出了一些常见的git命令。后续我会继续整理出一个更简单的txt命令文件方便直接复制粘贴。
-## 本文末尾有一些常见的git指令和使用场景，不能解决的问题直接ai
 
+> 此文档的作用是为了快速在本地建立git工作流程方便后续开发。文件中记录了我如何使用ssh协议连接github和已经解决的问题（clashverge抢占端口）文档中同时给出了一些常见的git命令。后续我会继续整理出一个更简单的txt命令文件方便直接复制粘贴。
+> 本文末尾有一些常见的git指令和使用场景，不能解决的问题直接ai
+
+---
+
+## ⭐ 多人协作日常流程（每次开发必看）
+
+```
+① main: git pull origin main              ← 拉取远程最新代码
+   ↓
+② git checkout dev/xxx                    ← 切换到自己的分支
+   git merge main                          ← 合并 main 到自己分支，提前解决冲突
+   ↓
+③ 开发 → git add . → git commit → git push ← 在自己分支上开发、提交、推送
+   ↓
+④ git checkout main                       ← 切回 main
+   git pull origin main                    ← 再次拉取（防止别人也推了 main）
+   git merge dev/xxx                       ← 合并自己的分支到 main
+   ↓
+⑤ git push origin main                    ← 推送 main 到远程
+```
+
+> **核心原则：冲突在自己的分支上解决，main 保持干净，不推半成品到主分支。**
+
+---
 
 ## 用户清单
 ### xuzhihao
