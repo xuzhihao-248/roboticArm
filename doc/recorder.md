@@ -122,6 +122,61 @@
 
 ---
 
+### 2026/06/05  xuzhihao-248
+
+**类型**：环境
+
+**内容**：完成 Ubuntu 22.04 虚拟机环境搭建 + ROS2 Humble 安装 + 开发工具链配置
+
+**环境**：VMware Workstation Pro + Ubuntu 22.04 LTS
+
+**完成事项**：
+
+1. **系统初始化**：更新系统、安装基础工具（curl/wget/git/vim/build-essential）、更换清华镜像源
+2. **VMware Tools**：安装 open-vm-tools，实现鼠标自由进出、剪贴板共享、拖拽文件、自适应分辨率
+3. **SSH Server**：安装 openssh-server，启用开机自启，VSCode Remote-SSH 连接虚拟机
+4. **ROS2 Humble 安装**：设置 UTF-8 Locale → 添加 ROS2 软件源和 GPG 密钥 → 安装 ros-humble-desktop → 安装 colcon/rosdep/ros-dev-tools → 初始化 rosdep → 写入 ~/.bashrc
+5. **工作空间**：创建 `~/ros2_ws/src/`，配置 `source ~/ros2_ws/install/setup.bash`
+6. **Python uv**：安装 uv 包管理器，安装 Python 3.10（与 ROS2 Humble 绑定版本一致），配置虚拟环境工作流
+7. **仿真工具**：安装 Gazebo（ros-humble-gazebo-ros-pkgs）、Navigation2（ros-humble-navigation2）、MoveIt2（ros-humble-moveit）
+8. **共享文件夹**：配置 VMware 共享文件夹 `D:\code\project\roboticArm` → VM `/mnt/hgfs/`，实现 Windows↔VM 高速文件传输
+
+**验证**：`ros2 run demo_nodes_cpp talker` + `ros2 run demo_nodes_py listener` 通信成功
+
+**相关文件**：`~/ros2_ws/`、`~/.bashrc`、`/etc/fstab`
+
+---
+
+### 2026/06/05  xuzhihao-248
+
+**类型**：代码
+
+**内容**：SolidWorks 机械臂 URDF → ROS2 RViz2 全流程打通
+
+**前提**：SolidWorks 侧使用 SW URDF Exporter 插件导出 5 轴机械臂（1 底座 + 4 关节），每个关节处手动建参考坐标系使 Z 轴对齐旋转轴
+
+**完成事项**：
+
+1. **文件传输**：通过 VMware 共享文件夹将导出的 URDF 包从 Windows 拷贝到 `~/ros2_ws/src/`（避免用 SCP，NAT 网络下极慢）
+2. **ROS1→ROS2 转换**：
+   - `package.xml`：format 改为 3，catkin → ament_cmake，添加 rviz2/robot_state_publisher/joint_state_publisher_gui 依赖
+   - `CMakeLists.txt`：替换为 5 行 ament_cmake 标准模板（用 printf 写入，避免 Windows 换行符问题）
+   - `launch/display.launch.py`：新建 ROS2 Python launch，启动 robot_state_publisher + joint_state_publisher_gui + rviz2 三个节点
+   - 删除 ROS1 遗留文件（display.launch、gazebo.launch、export.log）
+3. **URDF 修复**：Joint3 角度上下限相同（1.047/1.047）导致关节锁死，改为 -1.047/1.047
+4. **编译运行**：`colcon build --symlink-install` → `source install/setup.bash` → `ros2 launch my_robot display.launch.py`
+5. **RViz2 配置**：Fixed Frame → base_link，添加 RobotModel，Description Topic → /robot_description
+
+**踩过的坑**：
+- `src/` 根目录下多余的 CMakeLists.txt 导致编译解析失败（heredoc 跨平台写入出错）
+- RViz2 只看到 TF 坐标轴没有 3D 模型 → Description Topic 未设置为 /robot_description
+- 机械臂水平躺倒 → base_link 参考坐标系 Z 轴未竖直向上，需在 SolidWorks 中手动修正
+- 不要从 Windows 直接复制 CMakeLists.txt 到 VM，隐藏字符会导致 CMake 解析失败
+
+**相关文件**：`~/ros2_ws/src/my_robot/`（后改名为 newrobot）、`D:\code\project\roboticArm\my\urdf\`
+
+---
+
 ### 2026/06/06 20:29  xuzhihao-248
 
 **类型**：环境
