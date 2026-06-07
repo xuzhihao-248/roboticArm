@@ -153,7 +153,7 @@
 
 **内容**：SolidWorks 机械臂 URDF → ROS2 RViz2 全流程打通
 
-**前提**：SolidWorks 侧使用 SW URDF Exporter 插件导出 5 轴机械臂（1 底座 + 4 关节），每个关节处手动建参考坐标系使 Z 轴对齐旋转轴
+**前提**：SolidWorks 侧使用 SW URDF Exporter 插件导出 6 轴机械臂（1 底座 + 5 关节，末端还没有考虑），每个关节处手动建参考坐标系使 Z 轴对齐旋转轴
 
 **完成事项**：
 
@@ -173,7 +173,8 @@
 - 机械臂水平躺倒 → base_link 参考坐标系 Z 轴未竖直向上，需在 SolidWorks 中手动修正
 - 不要从 Windows 直接复制 CMakeLists.txt 到 VM，隐藏字符会导致 CMake 解析失败
 
-**相关文件**：`~/ros2_ws/src/my_robot/`（后改名为 newrobot）、`D:\code\project\roboticArm\my\urdf\`
+**相关文件**：`~/ros2_ws/src/my_robot/`（后改名为 newrobot）、`D:\code\project\roboticArm\my\urdf\`   
+**参考**：https://mp.weixin.qq.com/s?__biz=MzU1NjEwMTY0Mw==&mid=2247605924&idx=1&sn=5dc503fe141886e4feffadc92bc9ef39&chksm=fa7e9dd839d804376f49be638c164ae6c0909022df00a8904f21af94e19e2bf68c4ddf3e7eaf&scene=27
 
 ---
 
@@ -416,3 +417,13 @@ MoveIt 是机器人的"大脑"，负责运动规划。核心流程：
 - 数据量：5 电机 × 4 字节 = 20 字节/周期，远低于 CAN 带宽极限
 
 ---
+
+### 2026/6/7  xuzhihao-248
+
+**类型**：文档
+
+**内容**：添加了三个新文档
+
+**原因**：为了方便了解原版中的固件、软件和运行逻辑
+
+**相关文件**：doc/固件解析.md 软件解析.md 电路板解析.md
