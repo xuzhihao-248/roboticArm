@@ -427,3 +427,30 @@ MoveIt 是机器人的"大脑"，负责运动规划。核心流程：
 **原因**：为了方便了解原版中的固件、软件和运行逻辑
 
 **相关文件**：doc/固件解析.md 软件解析.md 电路板解析.md
+
+---
+
+### 2026/6/7  xuzhihao-248
+
+**类型**：硬件
+
+**内容**：安装 KiCad 8.0，从 Altium 工程文件导入 MotorDriver-42 原理图和 PCB，导出 BOM 表，MotorDriver-42 PCB 已下单嘉立创打样
+
+**关键操作**：
+
+1. **KiCad 导入**：文件 → 导入 → 非 KiCad 工程 → Altium Designer 工程 → 选择 `Motor-42.PrjPCB`，5 页原理图 + 4 层 PCB 导入成功
+2. **BOM 导出**：工具 → 生成 BOM → 导出为 CSV（遇到 UTF-8 编码问题，Excel 打开乱码，已通过添加 BOM（UTF-8 with BOM）解决）
+3. **BOM 核实（部分完成）**：
+   - ✅ TB67H450FNG ×2（确认双芯片设计）
+   - ✅ 晶振 12MHz（确认与固件 `hal_conf.h` 的 `HSE_VALUE 12000000U` 一致）
+   - ✅ CAN 收发器 SN65HVD232DR
+   - ✅ 电源方案 ME3116 + LP2992 + TL431 + TPS61040（非之前推测的 AMS1117）
+   - ⬜ 连接器间距 SH1.0mm 待确认
+   - ⬜ 全部封装名与实物对应关系待核对
+
+4. **PCB 下单**：嘉立创，10 片，4 层 FR-4，1.6mm，绿色阻焊，有铅喷锡，72-96h 加急
+5. **文档修正**：`doc/电路板解析.md` 修正晶振频率（8→12MHz）、CAN 收发器型号、电源方案，新增 §3.6 时钟配置来源说明
+
+**下一步**：核实 BOM 表中连接器和其他器件参数，确认后下单元器件采购
+
+**相关文件**：`my/HardWarePCB/MotorDriver/Motor-42.kicad_pro`、`my/HardWarePCB/MotorDriver/Motor-42.csv`（BOM）、`doc/电路板解析.md`
