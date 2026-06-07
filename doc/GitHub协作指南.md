@@ -9,6 +9,8 @@ user.name "xuzhihao-248"
 
 user.email "xu_zhihao@outlook.com"
 
+分支：dev/pcInofficeLarge  304大电脑
+
 ## 快速配置清单
 
 | 步骤 | 命令 |
