@@ -1,0 +1,3555 @@
+(kicad_sch
+	(version 20260306)
+	(generator "eeschema")
+	(generator_version "10.0")
+	(uuid "b3680393-9a88-4565-a0af-40ba0f6b9968")
+	(paper "A4")
+	(lib_symbols
+		(symbol "Motor-20-altium-import:GND_POWER_GROUND"
+			(power global)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "#PWR"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "GND"
+				(at 0 -6.35 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "电源符号创建名为 'GND' 的全局标签"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "power-flag"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "GND_POWER_GROUND_0_0"
+				(polyline
+					(pts
+						(xy -2.54 -2.54) (xy 2.54 -2.54)
+					)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.778 -3.302) (xy 1.778 -3.302)
+					)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -1.016 -4.064) (xy 1.016 -4.064)
+					)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy -0.254 -4.826) (xy 0.254 -4.826)
+					)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 0) (xy 0 -2.54)
+					)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin power_in line
+					(at 0 0 0)
+					(length 0)
+					(hide yes)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "Motor-20-altium-import:VCC_BAR"
+			(power global)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" "#PWR"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" "VCC"
+				(at 0 -3.81 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "电源符号创建名为 'VCC' 的全局标签"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_keywords" "power-flag"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "VCC_BAR_0_0"
+				(polyline
+					(pts
+						(xy -1.27 -2.54) (xy 1.27 -2.54)
+					)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 0) (xy 0 -2.54)
+					)
+					(stroke
+						(width 0.254)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin power_in line
+					(at 0 0 0)
+					(length 0)
+					(hide yes)
+					(name "VCC"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number ""
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "MyPcbLib:root_0_TB67H450FNG_MyPcbLib.IntLib"
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "PWM Chopper Type DC Brushed Motor Driver"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "*SO-8-PAD*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "root_0_TB67H450FNG_MyPcbLib.IntLib_1_0"
+				(rectangle
+					(start 0 0)
+					(end 15.24 -17.78)
+					(stroke
+						(width 0)
+						(type solid)
+						(color 152 0 0 1)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 13.208 -2.286)
+					(radius 0.508)
+					(stroke
+						(width -0.0001)
+						(type solid)
+						(color 152 0 0 1)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(pin passive line
+					(at 10.16 5.08 270)
+					(length 5.08)
+					(name "GND"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 7.62 5.08 270)
+					(length 5.08)
+					(name "IN2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 5.08 270)
+					(length 5.08)
+					(name "IN1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 2.54 5.08 270)
+					(length 5.08)
+					(name "VREF"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 2.54 -22.86 90)
+					(length 5.08)
+					(name "VCC"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 5.08 -22.86 90)
+					(length 5.08)
+					(name "OUT1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 7.62 -22.86 90)
+					(length 5.08)
+					(name "LSS"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "7"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 10.16 -22.86 90)
+					(length 5.08)
+					(name "OUT2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "8"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 12.7 -22.86 90)
+					(length 5.08)
+					(name "EP"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "9"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "MyPcbLib:root_0_电阻-0402_MyPcbLib.IntLib"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Resistor"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "*RES_0402*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "root_0_电阻-0402_MyPcbLib.IntLib_1_0"
+				(rectangle
+					(start 1.016 -2.54)
+					(end -1.016 2.54)
+					(stroke
+						(width 0)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin passive line
+					(at 0 3.81 270)
+					(length 1.27)
+					(name "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -3.81 90)
+					(length 1.27)
+					(name "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "MyPcbLib:root_0_电阻-1206_MyPcbLib.IntLib"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Resistor"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "*1206-RES*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "root_0_电阻-1206_MyPcbLib.IntLib_1_0"
+				(rectangle
+					(start 1.016 -2.54)
+					(end -1.016 2.54)
+					(stroke
+						(width 0)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin passive line
+					(at 0 3.81 270)
+					(length 1.27)
+					(name "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -3.81 90)
+					(length 1.27)
+					(name "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+		(symbol "MyPcbLib:root_1_电容-0402_MyPcbLib.IntLib"
+			(pin_numbers
+				(hide yes)
+			)
+			(pin_names
+				(hide yes)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(in_pos_files yes)
+			(duplicate_pin_numbers_are_jumpers no)
+			(property "Reference" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Value" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "Description" "Capacitor"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(property "ki_fp_filters" "*CAP_0402*"
+				(at 0 0 0)
+				(show_name no)
+				(do_not_autoplace no)
+				(hide yes)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+				)
+			)
+			(symbol "root_1_电容-0402_MyPcbLib.IntLib_1_0"
+				(polyline
+					(pts
+						(xy -1.27 0.508) (xy 1.27 0.508)
+					)
+					(stroke
+						(width 0)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 1.27) (xy 0 0.508)
+					)
+					(stroke
+						(width 0)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 0 -1.27) (xy 0 -0.508)
+					)
+					(stroke
+						(width 0)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 1.27 -0.508) (xy -1.27 -0.508)
+					)
+					(stroke
+						(width 0)
+						(type solid)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(pin passive line
+					(at 0 2.54 270)
+					(length 1.27)
+					(name "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 0 -2.54 90)
+					(length 1.27)
+					(name "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.27 1.27)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
+	)
+	(junction
+		(at 99.06 109.6772)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "1ec18801-7750-4212-9f8f-b13c80721a9c")
+	)
+	(junction
+		(at 99.06 140.1572)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "dbe7aaf6-4e6e-49b5-81fa-5fb353d50747")
+	)
+	(junction
+		(at 99.06 129.9972)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "e4e3ef76-6fcb-4339-abb2-03fff8063435")
+	)
+	(junction
+		(at 99.06 99.5172)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "fcdeed08-4e24-492f-91f5-4575c623d703")
+	)
+	(wire
+		(pts
+			(xy 187.96 109.6772) (xy 190.5 109.6772)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "03e7cba6-dcbc-40cd-901a-964f26eab7e9")
+	)
+	(wire
+		(pts
+			(xy 99.06 99.5172) (xy 104.14 99.5172)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "14c7197c-da7b-4be2-91b7-3bc4bbe19039")
+	)
+	(wire
+		(pts
+			(xy 99.06 140.1572) (xy 93.98 140.1572)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "160d1cd4-39c5-46e4-bca1-697300447aeb")
+	)
+	(wire
+		(pts
+			(xy 187.96 99.5172) (xy 187.96 94.4372)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "1a5148f3-6fb0-484f-a410-ee994df41666")
+	)
+	(wire
+		(pts
+			(xy 187.96 137.6172) (xy 193.04 137.6172)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2129a392-96a7-46ee-9749-aa7796db8e1c")
+	)
+	(wire
+		(pts
+			(xy 187.96 140.1572) (xy 190.5 140.1572)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "21ecf2dd-b8bb-4306-8d3b-4903fdcd83a8")
+	)
+	(wire
+		(pts
+			(xy 190.5 114.7572) (xy 203.2 114.7572)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "226ce917-f28a-4b2d-aa99-8644749681ab")
+	)
+	(wire
+		(pts
+			(xy 187.96 94.4372) (xy 203.2 94.4372)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "23146ea6-194d-48b9-9998-3e4945f1ca1c")
+	)
+	(wire
+		(pts
+			(xy 160.02 137.6172) (xy 147.32 137.6172)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "26415949-5c64-4ea6-be27-29de2b1f0600")
+	)
+	(wire
+		(pts
+			(xy 160.02 135.0772) (xy 147.32 135.0772)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "28e812af-cf21-4704-91ad-f27daec5137e")
+	)
+	(wire
+		(pts
+			(xy 99.06 140.1572) (xy 99.06 137.6172)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "29a816d7-022d-45bf-ad4a-ee7b6231ceeb")
+	)
+	(wire
+		(pts
+			(xy 193.04 129.9972) (xy 203.2 129.9972)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2b2766b9-263d-4dfa-b1d7-7dee72a1e99a")
+	)
+	(wire
+		(pts
+			(xy 160.02 132.5372) (xy 160.02 127.4572)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2c5b57e9-3031-4877-b22a-27e5e08e5c99")
+	)
+	(wire
+		(pts
+			(xy 99.06 132.5372) (xy 99.06 129.9972)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "2ce8668d-576a-48b4-8e55-380812f15905")
+	)
+	(wire
+		(pts
+			(xy 187.96 135.0772) (xy 195.58 135.0772)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "370c6a00-bfa8-4b41-8acc-361678644c5f")
+	)
+	(wire
+		(pts
+			(xy 190.5 145.2372) (xy 203.2 145.2372)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "37b04389-393f-439e-8a2e-f09f6b921c4a")
+	)
+	(wire
+		(pts
+			(xy 160.02 104.5972) (xy 147.32 104.5972)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "464a1ca5-c927-42b8-9d3b-118c2fff1e6f")
+	)
+	(wire
+		(pts
+			(xy 187.96 124.9172) (xy 203.2 124.9172)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4ac7654f-4585-43d0-8e1a-32920c44be30")
+	)
+	(wire
+		(pts
+			(xy 96.52 99.5172) (xy 99.06 99.5172)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "4e764cc2-1b63-44ae-b11c-a9b186690733")
+	)
+	(wire
+		(pts
+			(xy 114.3 129.9972) (xy 114.3 132.5372)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "534911a4-987b-4707-9fd4-ba6198030a4f")
+	)
+	(wire
+		(pts
+			(xy 193.04 99.5172) (xy 203.2 99.5172)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "543d7279-8b32-4ecf-9cce-370299b736ad")
+	)
+	(wire
+		(pts
+			(xy 187.96 107.1372) (xy 193.04 107.1372)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "59a9fae4-45bd-4bb3-8ee9-b2bcc8c05a57")
+	)
+	(wire
+		(pts
+			(xy 187.96 129.9972) (xy 187.96 124.9172)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5d916541-e6d2-4348-b248-24bc6ea2587c")
+	)
+	(wire
+		(pts
+			(xy 190.5 140.1572) (xy 190.5 145.2372)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5fdf68ca-2c3d-4983-a2c8-5dd32495e164")
+	)
+	(wire
+		(pts
+			(xy 111.76 99.5172) (xy 114.3 99.5172)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "60c64919-3d52-4707-8f36-de5fc24e71ce")
+	)
+	(wire
+		(pts
+			(xy 187.96 104.5972) (xy 195.58 104.5972)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6a8eb0fb-acf7-4815-ba56-23230e685ca9")
+	)
+	(wire
+		(pts
+			(xy 96.52 129.9972) (xy 99.06 129.9972)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "736e2270-a1cb-491f-8dfa-ae5cd0af4d1f")
+	)
+	(wire
+		(pts
+			(xy 193.04 137.6172) (xy 193.04 142.6972)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "8991b2ea-61b9-4ba0-8a28-23346aae99ef")
+	)
+	(wire
+		(pts
+			(xy 193.04 107.1372) (xy 193.04 112.2172)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9b2d56fe-2053-452a-9783-abf39f3f79cf")
+	)
+	(wire
+		(pts
+			(xy 111.76 129.9972) (xy 114.3 129.9972)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9f3bc8da-7218-4b67-a031-7b740438350a")
+	)
+	(wire
+		(pts
+			(xy 187.96 102.0572) (xy 193.04 102.0572)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "9fe51b73-a179-4644-95ed-fc966c1204f9")
+	)
+	(wire
+		(pts
+			(xy 114.3 137.6172) (xy 114.3 140.1572)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a090a9c7-3411-48a3-b185-0ac226d6fbaf")
+	)
+	(wire
+		(pts
+			(xy 193.04 142.6972) (xy 203.2 142.6972)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a7a0972e-f3ab-48bb-ae4b-e4bbab165443")
+	)
+	(wire
+		(pts
+			(xy 114.3 107.1372) (xy 114.3 109.6772)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a8c66951-31aa-4f5b-ab23-923f21348e9f")
+	)
+	(wire
+		(pts
+			(xy 114.3 140.1572) (xy 99.06 140.1572)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a9217a7e-7c84-4790-be1a-55954a3431ef")
+	)
+	(wire
+		(pts
+			(xy 160.02 102.0572) (xy 160.02 96.9772)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ab6f7590-62ea-41cc-9d04-afe5bd1c7846")
+	)
+	(wire
+		(pts
+			(xy 99.06 109.6772) (xy 93.98 109.6772)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b1d7b6e6-4884-454d-83a0-51ec76900a19")
+	)
+	(wire
+		(pts
+			(xy 193.04 112.2172) (xy 203.2 112.2172)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b5221b8b-c180-4435-99d9-67d06536c4bf")
+	)
+	(wire
+		(pts
+			(xy 160.02 107.1372) (xy 147.32 107.1372)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b6bc5862-c7aa-4726-952c-9c673db034f8")
+	)
+	(wire
+		(pts
+			(xy 193.04 132.5372) (xy 193.04 129.9972)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "b9e8bffe-5dd6-403e-ba08-f4555ad74b2f")
+	)
+	(wire
+		(pts
+			(xy 190.5 109.6772) (xy 190.5 114.7572)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "bd05b513-96ce-4cb5-9999-e4a4ca42455a")
+	)
+	(wire
+		(pts
+			(xy 99.06 109.6772) (xy 99.06 107.1372)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c0775ea1-8a32-4ec8-9c6c-612c7ca9f9d8")
+	)
+	(wire
+		(pts
+			(xy 99.06 129.9972) (xy 104.14 129.9972)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c1589e26-a16d-450c-b78f-41c295809fbb")
+	)
+	(wire
+		(pts
+			(xy 88.9 99.5172) (xy 73.66 99.5172)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d27c1da5-d174-4a5c-9f6e-94e8fecc7b6b")
+	)
+	(wire
+		(pts
+			(xy 160.02 127.4572) (xy 154.94 127.4572)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d68dc01b-0d34-4e00-9b03-2ad971c20eb3")
+	)
+	(wire
+		(pts
+			(xy 187.96 132.5372) (xy 193.04 132.5372)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "d8080e97-ad4b-417f-89ce-ef01c1ae0b4b")
+	)
+	(wire
+		(pts
+			(xy 160.02 140.1572) (xy 147.32 140.1572)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "db3c00c3-ba46-4c8c-ac9e-7f7cb00073ee")
+	)
+	(wire
+		(pts
+			(xy 160.02 109.6772) (xy 147.32 109.6772)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "def3742c-a3b5-4b96-8e06-f21228f2b7fd")
+	)
+	(wire
+		(pts
+			(xy 193.04 102.0572) (xy 193.04 99.5172)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e45e2888-42e5-4c66-8955-8464aaa2b6d9")
+	)
+	(wire
+		(pts
+			(xy 99.06 102.0572) (xy 99.06 99.5172)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "e7d91f15-2496-4aec-b8c0-791571acb9dd")
+	)
+	(wire
+		(pts
+			(xy 88.9 129.9972) (xy 73.66 129.9972)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "efc4f0de-e301-4760-88e3-b59cfdc2bee9")
+	)
+	(wire
+		(pts
+			(xy 114.3 109.6772) (xy 99.06 109.6772)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f22ef878-ab52-409c-8b24-f0788c1daee6")
+	)
+	(wire
+		(pts
+			(xy 114.3 99.5172) (xy 114.3 102.0572)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f2dd3120-b9c6-47bd-aa2d-a0228f332c3d")
+	)
+	(wire
+		(pts
+			(xy 160.02 96.9772) (xy 154.94 96.9772)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "f8f54ea5-e1fd-4e83-93e1-d921b1065a5f")
+	)
+	(label "VREF_B"
+		(at 114.3 129.9972 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "12857ede-1f5e-4da4-bc94-36d6c48bb26c")
+	)
+	(label "IN_BP"
+		(at 147.32 137.6172 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "1c45c73b-013b-4405-812e-26850aacf721")
+	)
+	(label "OUT_A+"
+		(at 195.58 112.2172 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "508ab69f-004c-4578-a7ca-edc08c1e13a9")
+	)
+	(label "IN_PWM_B"
+		(at 73.66 129.9972 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "57dce3b0-1527-4860-8de8-726bbe9cc8a3")
+	)
+	(label "IN_BM"
+		(at 147.32 135.0772 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "614801e0-d10a-439e-bbdb-3140f543c100")
+	)
+	(label "IN_AM"
+		(at 147.32 104.5972 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "7bf0661c-af65-43e7-8a4d-6a30058d1a99")
+	)
+	(label "IN_PWM_A"
+		(at 73.66 99.5172 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "8389432c-3572-4b05-8e23-e33596944677")
+	)
+	(label "OUT_B-"
+		(at 195.58 129.9972 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "9d699aba-9051-412b-9e28-b635bb5dde9c")
+	)
+	(label "VREF_B"
+		(at 147.32 140.1572 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a20d0333-a149-447e-8bd3-8c97dfe08fe5")
+	)
+	(label "OUT_B+"
+		(at 195.58 142.6972 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "a73b94e1-ba69-4322-93fb-e1df45ba2884")
+	)
+	(label "VREF_A"
+		(at 114.3 99.5172 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "bf5b5106-1930-4459-b24e-8d68b32ef3bf")
+	)
+	(label "IN_AP"
+		(at 147.32 107.1372 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "da26d4a2-69e9-4677-b148-9df77e4e4254")
+	)
+	(label "VREF_A"
+		(at 147.32 109.6772 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "eebcc6fe-2973-4085-83e2-6bbee59c9696")
+	)
+	(label "OUT_A-"
+		(at 195.58 99.5172 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left bottom)
+		)
+		(uuid "fb52c94d-9f04-4544-bba9-f938e543cf27")
+	)
+	(symbol
+		(lib_id "Motor-20-altium-import:GND_POWER_GROUND")
+		(at 154.94 96.9772 270)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "0b1a9c49-44a1-43aa-ad81-592b17a067aa")
+		(property "Reference" "#PWR?"
+			(at 154.94 96.9772 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 148.59 96.9772 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 154.94 96.9772 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 154.94 96.9772 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 154.94 96.9772 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin ""
+			(uuid "c92996a9-aef6-4a52-8793-c9bcd7c1209f")
+		)
+		(instances
+			(project "Motor-20"
+				(path "/3fae45fd-eb0b-4a68-81bc-0946dd9c2c97"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "MyPcbLib:root_0_电阻-1206_MyPcbLib.IntLib")
+		(at 199.39 104.5972 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "0bc0cc8d-fd42-45e8-9806-cbd53f6b5675")
+		(property "Reference" "R?"
+			(at 196.85 103.5812 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+			)
+		)
+		(property "Value" "0.1R"
+			(at 196.85 108.1532 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+			)
+		)
+		(property "Footprint" "1206-RES"
+			(at 199.39 104.5972 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 199.39 104.5972 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 199.39 104.5972 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ALTIUM_VALUE" "22R"
+			(at 194.31 102.0572 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+			)
+		)
+		(pin "2"
+			(uuid "29211321-94e0-41df-a3f9-a36da71babd8")
+		)
+		(pin "1"
+			(uuid "5d250fd0-59ca-4b07-9dcf-f06e475fbeee")
+		)
+		(instances
+			(project "Motor-20"
+				(path "/3fae45fd-eb0b-4a68-81bc-0946dd9c2c97"
+					(reference "R?")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "MyPcbLib:root_1_电容-0402_MyPcbLib.IntLib")
+		(at 114.3 135.0772 180)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "0dae4f33-b487-4d52-a0f5-59c2e3fa5061")
+		(property "Reference" "C?"
+			(at 115.824 136.0932 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+			)
+		)
+		(property "Value" "0.1uF"
+			(at 115.824 138.6332 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+			)
+		)
+		(property "Footprint" "CAP_0402"
+			(at 114.3 135.0772 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 114.3 135.0772 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Capacitor"
+			(at 114.3 135.0772 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ALTIUM_VALUE" "0.1u"
+			(at 112.776 132.0292 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+			)
+		)
+		(pin "2"
+			(uuid "5bfa77a2-59bf-4640-816b-5cc28b64f0f2")
+		)
+		(pin "1"
+			(uuid "0c15c866-fadf-4ff8-b84d-e3fbd8ababfc")
+		)
+		(instances
+			(project "Motor-20"
+				(path "/3fae45fd-eb0b-4a68-81bc-0946dd9c2c97"
+					(reference "C?")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Motor-20-altium-import:GND_POWER_GROUND")
+		(at 93.98 109.6772 270)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "4d963ded-3a96-47d6-8346-03a8132d18e7")
+		(property "Reference" "#PWR?"
+			(at 93.98 109.6772 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 87.63 109.6772 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 93.98 109.6772 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 93.98 109.6772 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 93.98 109.6772 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin ""
+			(uuid "c706465e-1dca-4272-b645-6323ec5f2e64")
+		)
+		(instances
+			(project "Motor-20"
+				(path "/3fae45fd-eb0b-4a68-81bc-0946dd9c2c97"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Motor-20-altium-import:GND_POWER_GROUND")
+		(at 203.2 94.4372 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "593c1652-80bc-4380-959c-b90cf6cb362d")
+		(property "Reference" "#PWR?"
+			(at 203.2 94.4372 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 209.55 94.4372 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 203.2 94.4372 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 203.2 94.4372 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 203.2 94.4372 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin ""
+			(uuid "8d34e4eb-4c67-4e70-ade8-1ac413107422")
+		)
+		(instances
+			(project "Motor-20"
+				(path "/3fae45fd-eb0b-4a68-81bc-0946dd9c2c97"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Motor-20-altium-import:VCC_BAR")
+		(at 203.2 145.2372 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "5ec70fc0-13e1-45f1-931c-42e87b7bc0e3")
+		(property "Reference" "#PWR?"
+			(at 203.2 145.2372 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "VCC"
+			(at 207.01 145.2372 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 203.2 145.2372 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 203.2 145.2372 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 203.2 145.2372 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin ""
+			(uuid "823b856e-51a8-45bd-8554-1e36c44ac305")
+		)
+		(instances
+			(project "Motor-20"
+				(path "/3fae45fd-eb0b-4a68-81bc-0946dd9c2c97"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Motor-20-altium-import:GND_POWER_GROUND")
+		(at 203.2 104.5972 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "6112cdd3-8b14-4898-8be2-c16f036b9dda")
+		(property "Reference" "#PWR?"
+			(at 203.2 104.5972 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 209.55 104.5972 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 203.2 104.5972 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 203.2 104.5972 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 203.2 104.5972 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin ""
+			(uuid "51f3b424-b955-4b76-99a6-3415c99ecfcd")
+		)
+		(instances
+			(project "Motor-20"
+				(path "/3fae45fd-eb0b-4a68-81bc-0946dd9c2c97"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "MyPcbLib:root_0_TB67H450FNG_MyPcbLib.IntLib")
+		(at 165.1 112.2172 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "6f8db049-67a2-47ab-97a8-7b9a9652b057")
+		(property "Reference" "U?"
+			(at 165.1 96.9772 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+			)
+		)
+		(property "Value" "TB67H450FNG"
+			(at 165.1 114.7572 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+			)
+		)
+		(property "Footprint" "SO-8-PAD"
+			(at 165.1 112.2172 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 165.1 112.2172 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "PWM Chopper Type DC Brushed Motor Driver"
+			(at 165.1 112.2172 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "1"
+			(uuid "e2177467-d149-45d5-ad18-3af3000fb8c6")
+		)
+		(pin "2"
+			(uuid "fe3fdf23-47ca-4b3a-958f-cf23f21c175d")
+		)
+		(pin "4"
+			(uuid "0332af2b-ff1c-4489-ae69-4cc5a89f881a")
+		)
+		(pin "6"
+			(uuid "346b437d-13c1-4d4c-be27-963a4f926249")
+		)
+		(pin "5"
+			(uuid "2fc24309-2dc5-4a57-8ff7-fa4bca5b0076")
+		)
+		(pin "8"
+			(uuid "18e3ba49-f250-45d0-8caf-ce652e85f89b")
+		)
+		(pin "9"
+			(uuid "205fd690-4b03-4dd2-9e9c-80ace5c3c6a3")
+		)
+		(pin "3"
+			(uuid "c57dccc2-903b-475b-9f6c-d10fe546bc55")
+		)
+		(pin "7"
+			(uuid "4daadb35-c71d-414e-ad9d-c006ec872d61")
+		)
+		(instances
+			(project "Motor-20"
+				(path "/3fae45fd-eb0b-4a68-81bc-0946dd9c2c97"
+					(reference "U?")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "MyPcbLib:root_0_TB67H450FNG_MyPcbLib.IntLib")
+		(at 165.1 142.6972 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "74b0012f-8ba8-499d-b83f-cb27b9cba47d")
+		(property "Reference" "U?"
+			(at 165.1 127.4572 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+			)
+		)
+		(property "Value" "TB67H450FNG"
+			(at 165.1 145.2372 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+			)
+		)
+		(property "Footprint" "SO-8-PAD"
+			(at 165.1 142.6972 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 165.1 142.6972 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "PWM Chopper Type DC Brushed Motor Driver"
+			(at 165.1 142.6972 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin "2"
+			(uuid "c12f4da9-b1fd-46b8-b9a0-af623f5c92b6")
+		)
+		(pin "3"
+			(uuid "cf12e407-79fb-4134-b016-364382b6c9c7")
+		)
+		(pin "6"
+			(uuid "3b642d16-11d6-46ec-a3a4-a97d18c27c8a")
+		)
+		(pin "8"
+			(uuid "3e915db0-8e42-41fb-b884-adcd9361b299")
+		)
+		(pin "9"
+			(uuid "4c69a7a0-3ff6-4422-bd2f-d00bdc0d5c44")
+		)
+		(pin "5"
+			(uuid "ee567242-87cb-44b1-867b-aa23e08fa683")
+		)
+		(pin "1"
+			(uuid "42d9e532-e2fb-420f-842f-2a84e3d77fc0")
+		)
+		(pin "7"
+			(uuid "83552c8d-8702-48ec-a8e7-2fd80fc5418c")
+		)
+		(pin "4"
+			(uuid "0b1bc41d-875c-4836-8cb5-ee617f94344c")
+		)
+		(instances
+			(project "Motor-20"
+				(path "/3fae45fd-eb0b-4a68-81bc-0946dd9c2c97"
+					(reference "U?")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "MyPcbLib:root_1_电容-0402_MyPcbLib.IntLib")
+		(at 99.06 135.0772 180)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "8b640d46-61d4-4609-89c0-6ebfd91b0d35")
+		(property "Reference" "C?"
+			(at 100.584 136.0932 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+			)
+		)
+		(property "Value" "0.1uF"
+			(at 100.584 138.6332 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+			)
+		)
+		(property "Footprint" "CAP_0402"
+			(at 99.06 135.0772 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 99.06 135.0772 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Capacitor"
+			(at 99.06 135.0772 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ALTIUM_VALUE" "0.1u"
+			(at 97.536 132.0292 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+			)
+		)
+		(pin "1"
+			(uuid "d159973f-2ae9-4c10-a857-25735b2698a9")
+		)
+		(pin "2"
+			(uuid "4d0bd173-0e44-4a2c-975f-5999a2a27b80")
+		)
+		(instances
+			(project "Motor-20"
+				(path "/3fae45fd-eb0b-4a68-81bc-0946dd9c2c97"
+					(reference "C?")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Motor-20-altium-import:VCC_BAR")
+		(at 203.2 114.7572 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "8e1598a2-db18-4f81-8723-882e803114e7")
+		(property "Reference" "#PWR?"
+			(at 203.2 114.7572 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "VCC"
+			(at 207.01 114.7572 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 203.2 114.7572 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 203.2 114.7572 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 203.2 114.7572 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin ""
+			(uuid "d1ace25a-e79a-4851-9312-39d00e8b05a3")
+		)
+		(instances
+			(project "Motor-20"
+				(path "/3fae45fd-eb0b-4a68-81bc-0946dd9c2c97"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Motor-20-altium-import:GND_POWER_GROUND")
+		(at 203.2 124.9172 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "a957b1a8-1cfb-4ff5-9abd-8aa373154bd8")
+		(property "Reference" "#PWR?"
+			(at 203.2 124.9172 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 209.55 124.9172 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 203.2 124.9172 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 203.2 124.9172 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 203.2 124.9172 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin ""
+			(uuid "54a8f3ac-2d44-420f-9779-1a0c5db278fd")
+		)
+		(instances
+			(project "Motor-20"
+				(path "/3fae45fd-eb0b-4a68-81bc-0946dd9c2c97"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Motor-20-altium-import:GND_POWER_GROUND")
+		(at 93.98 140.1572 270)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "b65ca72f-fafb-4258-b167-74ccf3f8e7ed")
+		(property "Reference" "#PWR?"
+			(at 93.98 140.1572 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 87.63 140.1572 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 93.98 140.1572 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 93.98 140.1572 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 93.98 140.1572 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin ""
+			(uuid "e5bce490-56a6-4c10-b130-2e9208fdfeed")
+		)
+		(instances
+			(project "Motor-20"
+				(path "/3fae45fd-eb0b-4a68-81bc-0946dd9c2c97"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "MyPcbLib:root_1_电容-0402_MyPcbLib.IntLib")
+		(at 114.3 104.5972 180)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "b9f5ea7e-9fcf-4723-83d1-b34c7dc5ee01")
+		(property "Reference" "C?"
+			(at 115.824 105.6132 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+			)
+		)
+		(property "Value" "0.1uF"
+			(at 115.824 108.1532 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+			)
+		)
+		(property "Footprint" "CAP_0402"
+			(at 114.3 104.5972 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 114.3 104.5972 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Capacitor"
+			(at 114.3 104.5972 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ALTIUM_VALUE" "0.1u"
+			(at 112.776 101.5492 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+			)
+		)
+		(pin "2"
+			(uuid "7c978c17-7fe4-43f2-9c95-d3f957283110")
+		)
+		(pin "1"
+			(uuid "39dd3401-654d-4dfc-a193-8a4a680953e5")
+		)
+		(instances
+			(project "Motor-20"
+				(path "/3fae45fd-eb0b-4a68-81bc-0946dd9c2c97"
+					(reference "C?")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "MyPcbLib:root_0_电阻-0402_MyPcbLib.IntLib")
+		(at 92.71 129.9972 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "bc04a62f-dbdc-4071-8193-a439bca13c73")
+		(property "Reference" "R?"
+			(at 90.17 128.9812 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+			)
+		)
+		(property "Value" "1K"
+			(at 90.17 133.5532 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+			)
+		)
+		(property "Footprint" "RES_0402"
+			(at 92.71 129.9972 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 92.71 129.9972 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 92.71 129.9972 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ALTIUM_VALUE" "22R"
+			(at 87.63 127.4572 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+			)
+		)
+		(pin "2"
+			(uuid "67ed7d2d-623e-488f-a65f-29e5b6b56ecb")
+		)
+		(pin "1"
+			(uuid "b81e3cd6-815c-4ca6-b10a-f073b3ca51aa")
+		)
+		(instances
+			(project "Motor-20"
+				(path "/3fae45fd-eb0b-4a68-81bc-0946dd9c2c97"
+					(reference "R?")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "MyPcbLib:root_0_电阻-1206_MyPcbLib.IntLib")
+		(at 199.39 135.0772 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "c5817d39-838a-4003-a33a-5d65c795be89")
+		(property "Reference" "R?"
+			(at 196.85 134.0612 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+			)
+		)
+		(property "Value" "0.1R"
+			(at 196.85 138.6332 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+			)
+		)
+		(property "Footprint" "1206-RES"
+			(at 199.39 135.0772 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 199.39 135.0772 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 199.39 135.0772 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ALTIUM_VALUE" "22R"
+			(at 194.31 132.5372 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+			)
+		)
+		(pin "2"
+			(uuid "f9641bde-fb2e-45e9-bf04-078cf99f5b36")
+		)
+		(pin "1"
+			(uuid "4d70b1c3-8b47-4aa2-9237-5071f5f35b38")
+		)
+		(instances
+			(project "Motor-20"
+				(path "/3fae45fd-eb0b-4a68-81bc-0946dd9c2c97"
+					(reference "R?")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Motor-20-altium-import:GND_POWER_GROUND")
+		(at 154.94 127.4572 270)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "c7bef47c-5a04-49a0-a4ba-1e69a30812ac")
+		(property "Reference" "#PWR?"
+			(at 154.94 127.4572 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 148.59 127.4572 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 154.94 127.4572 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 154.94 127.4572 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 154.94 127.4572 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin ""
+			(uuid "df6bf3b9-7dea-421f-9854-8e0b12e0fc37")
+		)
+		(instances
+			(project "Motor-20"
+				(path "/3fae45fd-eb0b-4a68-81bc-0946dd9c2c97"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "MyPcbLib:root_1_电容-0402_MyPcbLib.IntLib")
+		(at 99.06 104.5972 180)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "ce943d6b-575d-44eb-a350-47a22eb15d2f")
+		(property "Reference" "C?"
+			(at 100.584 105.6132 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+			)
+		)
+		(property "Value" "0.1uF"
+			(at 100.584 108.1532 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+			)
+		)
+		(property "Footprint" "CAP_0402"
+			(at 99.06 104.5972 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 99.06 104.5972 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Capacitor"
+			(at 99.06 104.5972 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ALTIUM_VALUE" "0.1u"
+			(at 97.536 101.5492 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+			)
+		)
+		(pin "1"
+			(uuid "67f020b7-85be-4bb5-b7ee-b99e12c7e705")
+		)
+		(pin "2"
+			(uuid "126b6945-a249-4d0c-b515-2ad736c5e18e")
+		)
+		(instances
+			(project "Motor-20"
+				(path "/3fae45fd-eb0b-4a68-81bc-0946dd9c2c97"
+					(reference "C?")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "MyPcbLib:root_0_电阻-0402_MyPcbLib.IntLib")
+		(at 107.95 129.9972 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "dc0a37b5-83c4-4a5c-beb4-928ae4c35354")
+		(property "Reference" "R?"
+			(at 105.41 128.9812 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+			)
+		)
+		(property "Value" "1K"
+			(at 105.41 133.5532 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+			)
+		)
+		(property "Footprint" "RES_0402"
+			(at 107.95 129.9972 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 107.95 129.9972 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 107.95 129.9972 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ALTIUM_VALUE" "22R"
+			(at 102.87 127.4572 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+			)
+		)
+		(pin "1"
+			(uuid "c8fc660a-a261-4a01-8147-e6b4a983e05c")
+		)
+		(pin "2"
+			(uuid "dbdd4a09-526c-42f9-b6be-9e8eae7bcc80")
+		)
+		(instances
+			(project "Motor-20"
+				(path "/3fae45fd-eb0b-4a68-81bc-0946dd9c2c97"
+					(reference "R?")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "MyPcbLib:root_0_电阻-0402_MyPcbLib.IntLib")
+		(at 92.71 99.5172 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "ec324860-4606-4b84-b3ee-ce81f237705f")
+		(property "Reference" "R?"
+			(at 90.17 98.5012 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+			)
+		)
+		(property "Value" "1K"
+			(at 90.17 103.0732 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+			)
+		)
+		(property "Footprint" "RES_0402"
+			(at 92.71 99.5172 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 92.71 99.5172 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 92.71 99.5172 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ALTIUM_VALUE" "22R"
+			(at 87.63 96.9772 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+			)
+		)
+		(pin "1"
+			(uuid "97948f3c-baab-496f-b5e6-48f736eae384")
+		)
+		(pin "2"
+			(uuid "356cac7a-4c3c-4490-bf84-b0a67bac602e")
+		)
+		(instances
+			(project "Motor-20"
+				(path "/3fae45fd-eb0b-4a68-81bc-0946dd9c2c97"
+					(reference "R?")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "MyPcbLib:root_0_电阻-0402_MyPcbLib.IntLib")
+		(at 107.95 99.5172 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "ed3a5b5a-bbb1-4f99-8ea6-267fdbed4c0f")
+		(property "Reference" "R?"
+			(at 105.41 98.5012 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+			)
+		)
+		(property "Value" "1K"
+			(at 105.41 103.0732 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+			)
+		)
+		(property "Footprint" "RES_0402"
+			(at 107.95 99.5172 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 107.95 99.5172 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" "Resistor"
+			(at 107.95 99.5172 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "ALTIUM_VALUE" "22R"
+			(at 102.87 96.9772 90)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right bottom)
+			)
+		)
+		(pin "2"
+			(uuid "46c7f2e6-18a6-434a-808e-7e32ebbbabee")
+		)
+		(pin "1"
+			(uuid "59b20978-34d5-4362-a1e6-7e33c15dfdff")
+		)
+		(instances
+			(project "Motor-20"
+				(path "/3fae45fd-eb0b-4a68-81bc-0946dd9c2c97"
+					(reference "R?")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "Motor-20-altium-import:GND_POWER_GROUND")
+		(at 203.2 135.0772 90)
+		(unit 1)
+		(body_style 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(in_pos_files yes)
+		(dnp no)
+		(uuid "f633c189-70ff-4fa0-9772-252dfd83ca41")
+		(property "Reference" "#PWR?"
+			(at 203.2 135.0772 0)
+			(hide yes)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Value" "GND"
+			(at 209.55 135.0772 90)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(justify right)
+			)
+		)
+		(property "Footprint" ""
+			(at 203.2 135.0772 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Datasheet" ""
+			(at 203.2 135.0772 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 203.2 135.0772 0)
+			(show_name no)
+			(do_not_autoplace no)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+			)
+		)
+		(pin ""
+			(uuid "94374805-f597-4d93-926b-05831d02f41f")
+		)
+		(instances
+			(project "Motor-20"
+				(path "/3fae45fd-eb0b-4a68-81bc-0946dd9c2c97"
+					(reference "#PWR?")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(sheet_instances
+		(path "/"
+			(page "2")
+		)
+	)
+	(embedded_fonts no)
+)
