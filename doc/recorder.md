@@ -554,7 +554,7 @@ MoveIt 是机器人的"大脑"，负责运动规划。核心流程：
 | 10uF 数量 | 电容，MLCC 电源滤波 | 7 | 6 |
 | 100uF 数量 | 电容，MLCC 电机电源滤波 | 4 | 2 |
 | 连接器 | 连接器，接口类型不同 | SH1.0-5P + 6P + 3P | SH1.0-**2P** + 3P |
-| STM32 数量 | IC，主控 MCU | 1 | **2**（双 MCU 架构） |
+| STM32 数量 | IC，主控 MCU | 1 | **1** |
 | NTC/3.3K/TL431 | 热敏电阻/电阻/电压基准 | 有 | 无 |
 
 #### 三、采购 vs 需求对比表（3×42 + 3×20）
@@ -593,7 +593,7 @@ MoveIt 是机器人的"大脑"，负责运动规划。核心流程：
 | 13.3K 0402 | 电阻，TPS61040 分压下臂 | 3 | 3 | 6 | 100 | +94 | ✅ |
 | 测试点 | 测试辅助，镀金测试环 | 6 | 6 | 12 | 50 | +38 | ✅ |
 | TB67H450FNG | IC，双H桥步进电机驱动 | 6 | 6 | 12 | 20 | +8 | ✅ |
-| **STM32F103CBT6** | **IC，ARM Cortex-M3 主控 MCU** | **3** | **6** | **9** | **8** | **-1** | ❌ |
+| **STM32F103CBT6** | **IC，ARM Cortex-M3 主控 MCU** | **3** | **6** | **6** | **8** | **+2** | ✅ |
 | TL431IDBZT | IC，精密电压基准 | 3 | 0 | 3 | 20 | +17 | ✅ |
 | SN65HVD232D | IC，CAN 总线收发器 | 3 | 3 | 6 | 10 | +4 | ✅ |
 | ME3116AM6G | IC，DC-DC 降压 40V→5V | 3 | 3 | 6 | 20 | +14 | ✅ |
@@ -659,7 +659,6 @@ CSV 总价 336.45 元 vs 淘宝截图合计约 385 元，差额约 48 元。原�
 
 #### 七、待办
 
-- [ ] 再购买 **1 个 STM32F103CBT6**（差 1 个）
 - [ ] 确认 R23 560K 下单时选对阻值（卖家标题含多个值混装）
 - [ ] 收货后实测 C20（10uF/50V 0402），该规格罕见，0.032 元/个价格偏低
 - [ ] 收货后测试 STM32F103CBT6（4.45 元偏低，可能非原装）
@@ -758,3 +757,164 @@ TB67H450 是双 H 桥，驱动两相步进电机。必须买 4 线（A+/A-/B+/B-
 | `micro_steps` | 256 | 细分数 |
 | `rated_current` | 1000 | 额定电流 mA |
 | `calibration_current` | 2000 | 校准电流 mA |
+
+---
+
+### 2026/06/10  xuzhihao-248
+
+**类型**：环境 + 代码
+
+**内容**：Unity 上位机开发环境搭建 + URDF 模型导入 + 关节控制 UI 实现
+
+**前提**：已安装 Unity 2022.3.62f3c1（路径 `E:\programfiles\unityEditor\2022.3.62f3c1`），已有 SolidWorks 导出的 5 轴机械臂 URDF（`D:\code\project\roboticArm\my\urdf\newrobot`）
+
+**相关文件**：`D:\code\project\roboticArmUnity\src\roboticArmStudio\Assets\`
+
+#### 一、环境搭建
+
+| 组件 | 状态 | 版本/路径 |
+|------|------|-----------|
+| VSCode | ✅ 已有 | 1.123.0 |
+| VSCode Unity 扩展 | ✅ 已有 | vstuc 1.2.2 |
+| VSCode C# 扩展 | ✅ 已有 | v2.140.8 |
+| .NET SDK | ✅ 新装 | 6.0.428（`winget install Microsoft.DotNet.SDK.6`） |
+| Unity Editor | ✅ 已有 | 2022.3.62f3c1 |
+| URP 渲染管线 | ✅ 新装 | 通过 Package Manager 安装 Universal RP |
+| URDF-Importer | ✅ 新装 | v0.5.2-preview（手动下载，git URL 方式报错） |
+
+**Unity 项目配置**：
+- 项目名：DummyStudio
+- 模板：3D (URP)
+- External Script Editor：Edit → Preferences → External Tools → Visual Studio Code
+
+#### 二、URDF 导入过程（遇到的问题及解决方案）
+
+##### 问题 1：URDF-Importer git URL 安装失败
+
+**现象**：通过 Package Manager 的 "Add package from git URL" 输入 `https://github.com/Unity-Technologies/URDF-Importer.git` 报错 `does not point to a valid package`
+
+**原因**：URL 缺少包路径参数
+
+**解决方案**：
+- 方法一（推荐）：使用带路径的 URL `https://github.com/Unity-Technologies/URDF-Importer.git?path=/com.unity.robotics.urdf-importer`
+- 方法二：手动下载 Release 包，通过 "Add package from disk" 导入 `package.json`
+
+**最终采用**：手动下载 v0.5.2 到 `D:\BaiduNetdiskDownload\URDF-Importer-0.5.2`，通过 "Add package from disk" 安装
+
+##### 问题 2：`package://` 路径解析错误
+
+**现象**：导入 URDF 时报错 `DirectoryNotFoundException: Could not find a part of the path "...newrobot\urdf\newrobot\meshes\base_link.STL"`
+
+**原因**：URDF 中 `package://newrobot/meshes/base_link.STL` 被导入器解析为相对于 URDF 文件的 `newrobot/meshes/` 子目录，导致路径多了一层 `newrobot`
+
+**尝试过的方案**：
+1. 将 meshes 放到 `Assets/Model/urdf/newrobot/urdf/meshes/` → 仍然报错，路径多了一层
+2. 改 URDF 路径为 `../meshes/` → 导入器警告 "Attempting to replace file path's starting instance of `../` with standard package notation `package://`"，然后又解析错误
+
+**最终解决方案**：将 meshes 文件夹放到导入器期望的位置 `Assets/newrobot/urdf/meshes/`，即：
+```
+Assets/newrobot/
+├── urdf/
+│   ├── newrobot.urdf
+│   └── meshes/        ← STL 文件放这里
+│       ├── base_link.STL
+│       └── ...
+└── meshes/            ← 原来的（可删除）
+```
+
+##### 问题 3：VHACD 碰撞体生成器报错
+
+**现象**：`NullReferenceException: Object reference not set to an instance of an object` 在 `MeshProcess.VHACD.GenerateConvexMeshes`
+
+**原因**：URDF-Importer 0.5.2 的 VHACD（凸分解碰撞体生成器）存在 bug
+
+**解决方案**：去掉 URDF 中所有 `<collision>` 块，只保留 `<visual>` 和 `<inertial>`。碰撞体可以后续在 Unity 中手动添加
+
+##### 问题 4：坐标系混乱，模型显示不正确
+
+**现象**：导入后模型各部件位置混乱，坐标系不对
+
+**原因**：SolidWorks 使用 Z-up 坐标系，Unity 使用 Y-up 坐标系。导入时选了 "Z Axis" 但未正确转换
+
+**解决方案**：导入时选择 **Y Axis** 而不是 Z Axis，模型显示正常
+
+##### 问题 5：Mesh 显示 Missing
+
+**现象**：导入成功后 Hierarchy 中有结构，但每个 link 的 Mesh Filter 显示 missing
+
+**原因**：URDF-Importer 创建了层级结构但未自动绑定网格引用
+
+**解决方案**：手动绑定 —— 选中每个 link 的 Visual 子物体，在 Inspector 中将 Mesh Filter → Mesh 槽拖入 `Assets/newrobot/urdf/meshes/` 中对应的 `.prefab` 文件
+
+#### 三、关节控制实现
+
+##### 问题 6：启动后机械臂坠落
+
+**现象**：点 Play 后机械臂受重力影响直接坠落
+
+**解决方案**：在 base_link 的 Articulation Body 组件中勾选 **Immovable**（或通过脚本 `baseLink.immovable = true`）
+
+##### 问题 7：滑块无法控制关节，关节慢慢下坠
+<video controls src="roboticArmStudio - SampleScene - Windows, Mac, Linux - Unity 2022.3.62f3c1_ _DX11_ 2026-06-10 22-48-05.mp4" title="Title"></video>
+
+**现象**：拖动滑块 xDrive.target 值变化，但关节不转动；机械臂在重力下慢慢坠落
+
+**原因**：
+1. Articulation Body 的 xDrive 参数（stiffness/damping/forceLimit）全部为 0
+2. 在 `Start()` 中设置 xDrive 会被 Unity 2022 的物理引擎重置
+
+**尝试过的方案**：
+1. 在 `Start()` 中设置 xDrive → 无效，值仍为 0
+2. 创建独立的 JointInitializer 脚本 → 同样无效
+
+**最终解决方案**：
+1. 使用 **协程延迟两帧** 初始化（`yield return null` 两次），绕过 Unity 2022 的物理引擎重置问题
+2. 大幅提高驱动参数：stiffness=100000, damping=10000, forceLimit=10000
+3. 设置关节约束：`twistLock = LimitedMotion`, `swingYLock = LockedMotion`, `swingZLock = LockedMotion`
+
+##### 问题 8：continuous 类型关节无法控制
+
+**现象**：revolute 关节（J2/J3/J5）正常工作，但 continuous 关节（J1/J4）不响应
+
+**原因**：continuous 关节不应设为 `LimitedMotion`，需要 `FreeMotion`
+
+**解决方案**：区分关节类型：
+- continuous 关节：`twistLock = ArticulationDofLock.FreeMotion`
+- revolute 关节：`twistLock = ArticulationDofLock.LimitedMotion`
+- 所有关节：`swingYLock = swingZLock = LockedMotion`
+
+#### 四、最终实现的功能
+
+| 功能 | 状态 | 说明 |
+|------|------|------|
+| URDF 模型加载 | ✅ | 5 轴机械臂 3D 模型正确显示 |
+| 关节控制 UI | ✅ | 5 个 UGUI 滑块，TextMeshPro 显示角度值 |
+| 关节物理驱动 | ✅ | ArticulationBody + xDrive，刚度/阻尼足够 |
+| 正运动学显示 | ✅ | 实时显示末端执行器 XYZ + 姿态 |
+| URP 渲染 | ✅ | 手动创建材质绑定到各 link |
+
+#### 五、关键代码文件
+
+| 文件 | 说明 |
+|------|------|
+| `Assets/Scripts/UI/JointControlPanel.cs` | 关节控制面板：滑块绑定、驱动参数初始化、底座固定 |
+| `Assets/Scripts/Kinematics/ForwardKinematics.cs` | 正运动学：读取末端 Transform 显示位姿 |
+| `Assets/Scripts/UI/JointInitializer.cs` | 早期版本，已合并到 JointControlPanel |
+
+#### 六、URDF 关节配置（从文件读取）
+
+| 关节 | 类型 | 轴方向 | 角度限位 | 原点偏移 (xyz m) | 原点旋转 (rpy rad) |
+|------|------|--------|----------|-------------------|---------------------|
+| joint1 (base→link1) | continuous | (0,0,-1) | 无限制 | 0, 0, 0.0735 | 0, 0, 0 |
+| joint2 (link1→link2) | revolute | (0,0,-1) | -60° ~ 60° | 0.035, -0.02, 0.0355 | π/2, 0, 0 |
+| joint3 (link2→link3) | revolute | (0,0,-1) | -60° ~ 60° | 0, 0.146, 0.00015 | 0, 0, π/2 |
+| joint4 (link3→link4) | continuous | (0,0,-1) | 无限制 | 0.052, 0.012, -0.02015 | π/2, 0, 0 |
+| joint5 (link4→link5) | revolute | (0,0,1) | -120° ~ 120° | 0, 0.0068, 0.127 | π/2, -π/2, 0 |
+
+#### 七、待办
+
+- [ ] 串口通信层（SerialTransport）实现
+- [ ] 逆运动学（IK）拖拽控制
+- [ ] J6 轴 + Hand 末端执行器补充
+- [ ] 预设姿态管理
+- [ ] 数据监控面板
