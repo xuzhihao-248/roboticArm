@@ -855,7 +855,7 @@ Assets/newrobot/
 **解决方案**：在 base_link 的 Articulation Body 组件中勾选 **Immovable**（或通过脚本 `baseLink.immovable = true`）
 
 ##### 问题 7：滑块无法控制关节，关节慢慢下坠
-<video controls src="roboticArmStudio - SampleScene - Windows, Mac, Linux - Unity 2022.3.62f3c1_ _DX11_ 2026-06-10 22-48-05.mp4" title="Title"></video>
+<video controls src="roboticArmStudio - SampleScene - Windows, Mac, Linux - Unity 2022.3.62f3c1_ _DX11_ 2026-06-10 22-48-05.mp4" title="故障展示"></video>
 
 **现象**：拖动滑块 xDrive.target 值变化，但关节不转动；机械臂在重力下慢慢坠落
 
@@ -918,3 +918,78 @@ Assets/newrobot/
 - [ ] J6 轴 + Hand 末端执行器补充
 - [ ] 预设姿态管理
 - [ ] 数据监控面板
+
+---
+
+### 2026/06/11  xuzhihao-248
+
+**类型**：代码
+
+**内容**：Unity 上位机房间场景导入 + 开始界面 + 摄像头飞入动画
+
+**前提**：URDF 模型和滑块控制 UI 已跑通（06/10），手机 3D Scanner App 扫描了实验室房间
+
+**完成事项**：
+
+1. **房间场景导入**：3D Scanner App 导出 OBJ+MTL+JPG 格式，拖入 Unity `Assets/Models/Room/`，Extract Materials 后 Shader 改为 URP/Lit
+2. **开始界面**：在现有 Canvas 下新建 StartPanel（全屏半透明 + "开始调试"按钮）
+3. **摄像头飞入动画**：新建 3 个脚本实现状态机 + 变速飞行
+   - `GameController.cs`：管理 Start → Flying → Control 三个状态，控制 UI 面板显隐
+   - `CameraFlythrough.cs`：沿路径点变速飞行，AnimationCurve 缓动（默认 EaseInOut）
+   - `StartMenu.cs`：按钮点击触发状态切换和飞入
+4. **路径点配置**：3 个空 GameObject（门口 → 过渡 → 机械臂前），坐标在 Inspector 中微调
+
+**3D Scanner App 导出说明**：
+- 导出选 OBJ 格式（贴图独立，方便修改）
+- 文件组成：`.obj` + `.mtl` + `.jpg`
+- Unity 导入后需：Extract Materials → Shader 改 URP/Lit → 重新指定贴图
+- Scale Factor 按实际调整（扫描模型单位通常不是米）
+
+**相关文件**：`D:\code\project\roboticArmUnity\src\roboticArmStudio\Assets\Scripts\`
+
+---
+
+### 2026/06/11  xuzhihao-248
+
+**类型**：代码
+
+**内容**：Unity 上位机通信层实现（T-09 ~ T-12），完整链路跑通
+
+**前提**：URDF 模型 + 滑块控制 + 房间场景 + 开始界面已就绪
+
+**完成事项**：
+
+1. **T-09 通信抽象接口**：
+   - `ITransport.cs`：接口定义（Connect/Disconnect/Send/OnDataReceived）
+   - `SimulatedTransport.cs`：模拟实现，支持关节指令 `>j1,j2,...`、查询 `#GETJPOS`/`#GETLPOS`、使能/急停等
+
+2. **T-10 通信管理器**：
+   - `TransportManager.cs`：单例，持有 ITransport 实例，统一转发收发数据，支持运行时切换传输层
+
+3. **T-11 UI 与通信整合**：
+   - `JointControlPanel.cs` 新增 `enableTransport` 开关，滑块变化时自动通过 TransportManager 发送 `>j1,j2,...` 指令
+   - `TransportPanel.cs`：连接状态 UI（状态文本 + 连接/断开按钮）
+
+4. **T-12 姿态同步**：
+   - `PoseSync.cs`：每 100ms 发送 `#GETJPOS` 查询，收到响应后解析角度并更新 ArticulationBody.xDrive
+
+**通信链路**：
+```
+滑块 → JointControlPanel → TransportManager.Send(">90,0,...")
+  → SimulatedTransport（存储角度）→ 响应 "J:90.0,0.0,..."
+  → PoseSync 解析 → 更新模型关节
+```
+
+**设计原则**：Demo 阶段用 SimulatedTransport 验证架构，后续接硬件只需新增 SerialTransport 实现 ITransport，其他代码不动。
+
+**新增脚本**：
+
+| 文件 | 功能 |
+|------|------|
+| `Assets/Scripts/Communication/ITransport.cs` | 传输层抽象接口 |
+| `Assets/Scripts/Communication/SimulatedTransport.cs` | 模拟传输实现 |
+| `Assets/Scripts/Communication/TransportManager.cs` | 通信管理器单例 |
+| `Assets/Scripts/Sync/PoseSync.cs` | 姿态同步（定时查询+更新模型） |
+| `Assets/Scripts/UI/TransportPanel.cs` | 连接状态 UI |
+
+**相关文件**：`D:\code\project\roboticArmUnity\src\roboticArmStudio\Assets\Scripts\`
