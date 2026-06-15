@@ -445,7 +445,7 @@ MoveIt 是机器人的"大脑"，负责运动规划。核心流程：
    - ✅ 晶振 12MHz（确认与固件 `hal_conf.h` 的 `HSE_VALUE 12000000U` 一致）
    - ✅ CAN 收发器 SN65HVD232DR
    - ✅ 电源方案 ME3116 + LP2992 + TL431 + TPS61040（非之前推测的 AMS1117）
-   - ✅ 连接器间距 SH1.0mm 待确认
+   - ⬜ 连接器间距 SH1.0mm 待确认
    - ⬜ 全部封装名与实物对应关系待核对
 
 4. **PCB 下单**：嘉立创，10 片，4 层 FR-4，1.6mm，绿色阻焊，有铅喷锡，72-96h 加急
@@ -455,541 +455,93 @@ MoveIt 是机器人的"大脑"，负责运动规划。核心流程：
 
 **相关文件**：`my/HardWarePCB/MotorDriver/Motor-42.kicad_pro`、`my/HardWarePCB/MotorDriver/Motor-42.csv`（BOM）、`doc/电路板解析.md`
 
----
-
 ### 2026/6/8  xuzhihao-248
 
-**类型**：硬件
-
-**内容**：通过 SolidWorks 测量了电机和减速器的关键尺寸
-
-**步进电机**：
-
-| 型号 | 数量 | 出轴直径 |
-|------|------|----------|
-| 42 步进电机 | 3 | Φ5mm |
-| 20 步进电机 | 3 | Φ5mm |
-
-**减速器**：
-
-| 编号 | 外形尺寸 | 输入轴 | 输出轴 |
-|------|----------|--------|--------|
-| 1 | 42mm × 42mm × 32mm | — | Φ10mm |
-| 2 | 30.7mm × 30.7mm × 26.9mm | Φ5mm | Φ9mm |
-| 3 | 20mm × 20mm × 15.2mm | Φ3mm | Φ5mm |
-
-**原因**：为后续结构设计和装配提供准确的尺寸参考
-
-**相关文件**：—
-
----
-
-### 2026/06/09  xuzhihao-248
-
-**类型**：硬件
-
-**内容**：42 驱动板 + 20 驱动板元器件采购核对，完成封装验证、数量验证、价格核对
-
-> 涉及器件类型：电容（MLCC 去耦/滤波）、电阻（信号/采样/分压）、电感（DC-DC 储能）、二极管（肖特基/TVS/整流）、连接器（SH1.0 系列）、主控芯片（STM32F103CBT6）、电机驱动（TB67H450FNG 双H桥）、磁编码器（MT6816 14-bit SPI）、CAN 收发器（SN65HVD232D）、电源管理（ME3116 DC-DC + LP2992 LDO + TPS61040 升压 + TL431 基准）、晶振（12MHz 陶瓷谐振器）、按键、测试点
-
-**原因**：下单前最终确认，避免买错器件或数量不够
-
-**相关文件**：`my/selfHardWarePCB/MotorDriver/采购元件/Motor-42.csv`、`my/selfHardWarePCB/MotorDriver/42motorDriver/Motor-42.txt`、`my/selfHardWarePCB/MotorDriver/20motorDriver/Motor-20.txt`
-
-#### 一、采购目标
-
-3 块 42 驱动板 + 3 块 20 驱动板，共 6 块板子。
-
-#### 二、每块板器件数量（原理图统计）
-
-**42 驱动板（56 个器件/板）：**
-
-| 器件 | 说明 | 位号 | 数量/板 |
-|------|------|------|--------|
-| 0.1uF 0402 | 电容，MLCC 去耦滤波 | C1,C2,C4,C5,C6,C7,C8,C9,C15,C17,C18,C21,C25,C26,C32 | 15 |
-| 10uF 0402 | 电容，MLCC 电源滤波 | C3,C10,C19,C22,C24,C28,C30 | 7 |
-| 100uF 1206 | 电容，MLCC 电机电源大容量滤波 | C11,C12,C13,C14 | 4 |
-| 100pF 0402 | 电容，NPO 高频滤波 | C16 | 1 |
-| 10uF/50V 0402 | 电容，MLCC 高压滤波 | C20 | 1 |
-| 10nF 0402 | 电容，MLCC 去耦 | C23 | 1 |
-| 220pF 0402 | 电容，NPO 滤波 | C33 | 1 |
-| SS54 DO-214AC | 二极管，肖特基 防反接/续流 | D1 | 1 |
-| SMBJ28CA | 二极管，TVS 28V 过压保护 | D2 | 1 |
-| 1N5819W SOD-323 | 二极管，肖特基 整流 | D3,D4 | 2 |
-| 1N5819WS SOD-323 | 二极管，肖特基 整流 | D6 | 1 |
-| 跳线 0R 0402 | 电阻，0Ω 跳线/可选连接 | J1 | 1 |
-| 按键 3×4×2 | 开关，SMD 贴片按键 | K1,K2 | 2 |
-| 6.8uH 201612 | 电感，DC-DC 升压储能 | L1 | 1 |
-| 2.2uH 2520 | 电感，DC-DC 储能 | L2 | 1 |
-| SH1.0-5P | 连接器，1.0mm间距 5Pin 卧贴 | P1 | 1 |
-| SH1.0-6P | 连接器，1.0mm间距 6Pin 卧贴 | P2,P3,P4 | 3 |
-| SH1.0-3P | 连接器，1.0mm间距 3Pin 卧贴 | P5 | 1 |
-| 1K 0402 | 电阻，信号限流/上拉 | R1,R2,R6,R7,R17 | 5 |
-| 0.1R 1206 | 电阻，电流采样（LSS到GND） | R3,R8 | 2 |
-| NTC 10K 0402 | 热敏电阻，温度检测（电机过热保护） | R4 | 1 |
-| 3.3K 0402 | 电阻，分压/偏置 | R5 | 1 |
-| 10K 0402 | 电阻，上拉/分压 | R9,R10,R13,R16 | 4 |
-| 120R 0402 | 电阻，CAN 总线终端匹配 | R11,R12 | 2 |
-| 1.8K 0402 | 电阻，上拉/限流 | R14 | 1 |
-| 1M 0402 | 电阻，高阻分压 | R15 | 1 |
-| 560K 0402 | 电阻，TPS61040 反馈分压 | R23 | 1 |
-| 93.1K 0402 | 电阻，TPS61040 反馈分压（上臂） | R26 | 1 |
-| 13.3K 0402 | 电阻，TPS61040 反馈分压（下臂） | R27 | 1 |
-| 测试点 | 测试辅助，镀金测试环 | T1,T2 | 2 |
-| TB67H450FNG SO-8-PAD | IC，东芝双H桥步进电机驱动 | U1,U2 | 2 |
-| STM32F103CBT6 LQFP-48 | IC，ARM Cortex-M3 主控 MCU | U3 | 1 |
-| TL431IDBZT SOT-23-3 | IC，精密可调电压基准 | U4 | 1 |
-| SN65HVD232D SO-8 | IC，CAN 2.0 总线收发器 | U5 | 1 |
-| ME3116AM6G SOT-23-6 | IC，DC-DC 降压（40V→5V） | U6 | 1 |
-| LP2992 3.3V SOT-23-5 | IC，LDO 低压差稳压（5V→3.3V） | U7 | 1 |
-| MT6816 SO-8 | IC，14-bit 磁编码器（SPI，角度反馈） | U8 | 1 |
-| TPS61040DBV SOT-23-5 | IC，DC-DC 升压转换器 | U11 | 1 |
-| 12MHz 晶振-3P | 晶振，陶瓷谐振器（内置电容，HSE时钟源） | Y1 | 1 |
-
-**20 驱动板（与 42 板的差异）：**
-
-| 差异项 | 说明 | 42 板 | 20 板 |
-|--------|------|-------|-------|
-| 0.1uF 数量 | 电容，MLCC 去耦 | 15 | 14 |
-| 10uF 数量 | 电容，MLCC 电源滤波 | 7 | 6 |
-| 100uF 数量 | 电容，MLCC 电机电源滤波 | 4 | 2 |
-| 连接器 | 连接器，接口类型不同 | SH1.0-5P + 6P + 3P | SH1.0-**2P** + 3P |
-| STM32 数量 | IC，主控 MCU | 1 | **1** |
-| NTC/3.3K/TL431 | 热敏电阻/电阻/电压基准 | 有 | 无 |
-
-#### 三、采购 vs 需求对比表（3×42 + 3×20）
-
-| 器件 | 说明 | 42板×3 | 20板×3 | 合计 | 采购 | 余量 | 判定 |
-|------|------|--------|--------|------|------|------|------|
-| 0.1uF 0402 16V | 电容，MLCC 去耦 | 45 | 42 | 87 | 100 | +13 | ✅ |
-| 10uF 0402 16V | 电容，MLCC 电源滤波 | 21 | 18 | 39 | 100 | +61 | ✅ |
-| 100uF 1206 25V | 电容，MLCC 电机电源滤波 | 12 | 6 | 18 | 40 | +22 | ✅ |
-| 100pF 0402 50V | 电容，NPO 高频滤波 | 3 | 3 | 6 | 100 | +94 | ✅ |
-| 10uF/50V 0402 | 电容，MLCC 高压滤波 | 3 | 0 | 3 | 100 | +97 | ✅ |
-| 10nF 0402 50V | 电容，MLCC 去耦 | 3 | 3 | 6 | 100 | +94 | ✅ |
-| 220pF 0402 50V | 电容，NPO 滤波 | 3 | 3 | 6 | 100 | +94 | ✅ |
-| SS54 DO-214AC | 二极管，肖特基 防反接/续流 | 3 | 3 | 6 | 20 | +14 | ✅ |
-| SMBJ28CA | 二极管，TVS 过压保护 | 3 | 3 | 6 | 20 | +14 | ✅ |
-| 1N5819W SOD-323 | 二极管，肖特基 整流 | 6 | 6 | 12 | 50 | +38 | ✅ |
-| 1N5819WS SOD-323 | 二极管，肖特基 整流 | 3 | 3 | 6 | 100 | +94 | ✅ |
-| 跳线 0R 0402 | 电阻，0Ω 跳线 | 3 | 3 | 6 | 16 | +10 | ✅ |
-| 按键 3×4×2 | 开关，SMD 贴片按键 | 6 | 6 | 12 | 100 | +88 | ✅ |
-| 6.8uH 201612 | 电感，DC-DC 升压储能 | 3 | 3 | 6 | 100 | +94 | ✅ |
-| 2.2uH 2520 | 电感，DC-DC 储能 | 3 | 3 | 6 | 20 | +14 | ✅ |
-| SH1.0-5P | 连接器，5Pin 卧贴 | 3 | 0 | 3 | 30 | +27 | ✅ |
-| SH1.0-6P | 连接器，6Pin 卧贴 | 9 | 0 | 9 | 50 | +41 | ✅ |
-| SH1.0-2P | 连接器，2Pin 卧贴 | 0 | 6 | 6 | 20 | +14 | ✅ |
-| SH1.0-3P | 连接器，3Pin 卧贴 | 3 | 3 | 6 | 30 | +24 | ✅ |
-| 1K 0402 | 电阻，信号限流/上拉 | 15 | 15 | 30 | 40 | +10 | ✅ |
-| 0.1R 1206 | 电阻，电流采样 | 6 | 6 | 12 | 50 | +38 | ✅ |
-| NTC 10K 0402 | 热敏电阻，温度检测 | 3 | 0 | 3 | 50 | +47 | ✅ |
-| 3.3K 0402 | 电阻，分压/偏置 | 3 | 0 | 3 | 100 | +97 | ✅ |
-| 10K 0402 | 电阻，上拉/分压 | 12 | 12 | 24 | 100 | +76 | ✅ |
-| 120R 0402 | 电阻，CAN 终端匹配 | 6 | 3 | 9 | 100 | +91 | ✅ |
-| 1.8K 0402 | 电阻，上拉/限流 | 3 | 3 | 6 | 100 | +94 | ✅ |
-| 1M 0402 | 电阻，高阻分压 | 3 | 3 | 6 | 20 | +14 | ✅ |
-| 560K 0402 | 电阻，TPS61040 反馈分压 | 3 | 3 | 6 | 16 | +10 | ✅ |
-| 93.1K 0402 | 电阻，TPS61040 分压上臂 | 3 | 3 | 6 | 100 | +94 | ✅ |
-| 13.3K 0402 | 电阻，TPS61040 分压下臂 | 3 | 3 | 6 | 100 | +94 | ✅ |
-| 测试点 | 测试辅助，镀金测试环 | 6 | 6 | 12 | 50 | +38 | ✅ |
-| TB67H450FNG | IC，双H桥步进电机驱动 | 6 | 6 | 12 | 20 | +8 | ✅ |
-| **STM32F103CBT6** | **IC，ARM Cortex-M3 主控 MCU** | **3** | **6** | **6** | **8** | **+2** | ✅ |
-| TL431IDBZT | IC，精密电压基准 | 3 | 0 | 3 | 20 | +17 | ✅ |
-| SN65HVD232D | IC，CAN 总线收发器 | 3 | 3 | 6 | 10 | +4 | ✅ |
-| ME3116AM6G | IC，DC-DC 降压 40V→5V | 3 | 3 | 6 | 20 | +14 | ✅ |
-| LP2992 3.3V | IC，LDO 5V→3.3V | 3 | 3 | 6 | 8 | +2 | ✅ |
-| MT6816 | IC，14-bit 磁编码器 SPI | 3 | 3 | 6 | 8 | +2 | ✅ |
-| TPS61040DBV | IC，DC-DC 升压转换器 | 3 | 3 | 6 | 8 | +2 | ✅ |
-| 12MHz 晶振-3P | 晶振，陶瓷谐振器 HSE 时钟 | 3 | 3 | 6 | 10 | +4 | ✅ |
-
-#### 四、封装验证
-
-所有 39 种器件的采购封装与原理图要求一一核对，**全部正确**。关键确认项：
-
-| 器件 | 说明 | 原理图封装 | 采购封装 | 验证要点 |
-|------|------|-----------|---------|---------|
-| TB67H450FNG | IC，双H桥电机驱动 | SO-8-PAD | SO-8-PAD | 带散热焊盘，非普通 SO-8 |
-| STM32F103CBT6 | IC，主控 MCU | LQFP-48 | LQFP-48 | 型号 B=48脚，T=LQFP |
-| SN65HVD232D | IC，CAN 收发器 | SO-8 | SOP-8 | SO-8=SOP-8，仅命名差异 |
-| 2.2uH 电感 | 电感，DC-DC 储能 | 2520-L | LQM2HPN2R2MG0L 2520 | 村田型号，1.3A 额定 |
-| 12MHz 晶振 | 晶振，HSE 时钟源 | 晶振-3P | CSTNE12M0G520000R0 3Pin | 村田陶瓷谐振器，内置电容 |
-| 1N5819W | 二极管，肖特基整流 | SOD-323 | SOD-323 | 卖家标题写"0805"但实际是 SOD-323 |
-
-#### 五、价格差异分析
-
-CSV 总价 336.45 元 vs 淘宝截图合计约 385 元，差额约 48 元。原因：
-
-| 差异项 | 截图价 | CSV价 | 原因 |
-|--------|--------|-------|------|
-| C3 10uF | 5元(10V) | 9元(16V) | CSV 更新为 16V 版本 |
-| C11-C14 100uF | 11元(20个) | 5.5元(10个) | 截图多买了 |
-| L2 2.2uH | 6.2元(0.31×20) | 8元(0.40×20) | CSV 换了村田型号 |
-| U5 SN65HVD232D | 15元(10×1.5) | 20元(10×2) | 截图单价更低 |
-| 其他数量差异 | — | — | 部分器件截图多买 |
-
-#### 六、关键器件型号解读
-
-**STM32F103CBT6（主控 MCU）：**
-
-| 字段 | 含义 |
-|------|------|
-| STM32 | ARM Cortex-M 系列 |
-| F103 | 基础型，Cortex-M3，72MHz |
-| C | 256KB Flash |
-| **B** | **48 引脚** |
-| **T** | **LQFP 封装** |
-| 6 | -40~85°C 工业级 |
-
-→ B+T = LQFP-48，与原理图封装完全匹配。
-
-**YSMC201612H-6R8MB（6.8uH 电感）：**
-
-| 字段 | 含义 |
-|------|------|
-| YSMC | 系列名（一体成型功率电感） |
-| **201612** | 封装尺寸 2.0×1.6×1.2mm |
-| H | 扁线 T-CORE 结构 |
-| **6R8** | **6.8μH**（R = 小数点） |
-| M | 精度 ±20% |
-| B | 变体后缀 |
-
-→ 封装 201612 = 原理图 IND-201612，电感值 6.8μH，额定电流 1.9A，完全匹配。
-
----
-
-#### 七、待办
-
-- [ ] 确认 R23 560K 下单时选对阻值（卖家标题含多个值混装）
-- [ ] 收货后实测 C20（10uF/50V 0402），该规格罕见，0.032 元/个价格偏低
-- [ ] 收货后测试 STM32F103CBT6（4.45 元偏低，可能非原装）
-
----
-
-### 2026/06/09  xuzhihao-248
-
-**类型**：硬件
-
-**内容**：42 步进电机和 20 步进电机采购选型指南
-
-**原因**：驱动板元器件已下单，下一步采购电机，需提前确认选型参数
-
-**相关文件**：`doc/电路板解析.md`、`doc/固件解析.md`
-
-#### 一、必须匹配的参数
-
-##### 1. 相电流 ≤ TB67H450 驱动能力
-
-TB67H450FNG 是东芝双 H 桥电机驱动芯片，最大输出电流 2A（峰值）。
-
-| 参数 | TB67H450 限制 | 固件默认值 | 采购要求 |
-|------|-------------|-----------|---------|
-| 额定电流 | 最大 2A（峰值） | 1000mA | **每相电流 ≤ 1.5A 留余量** |
-| 校准电流 | — | 2000mA | 短时 2A，电机要能承受 |
-
-电流太小（<0.5A）→ 扭矩不够；电流太大（>2A）→ 芯片过热保护。
-
-##### 2. 步距角 1.8°
-
-固件默认 `steps_per_revolution = 200`（1.8° 步距角）。如果买 0.9° 的电机，需改固件参数为 400，否则实际转速和位置会错。
-
-##### 3. 两相四线制
-
-TB67H450 是双 H 桥，驱动两相步进电机。必须买 4 线（A+/A-/B+/B-）的电机。
-
-| 线制 | 能不能用 | 说明 |
-|------|---------|------|
-| 4 线（两相） | ✅ | 直接接 |
-| 6 线（带中心抽头） | ✅ | 只接 A+/A-/B+/B-，中心抽头悬空 |
-| 8 线（可串/并联） | ✅ | 串联接法 |
-| 5 线（带公共端） | ❌ | 不能用 |
-
-#### 二、重要但可调的参数
-
-##### 4. 额定电压
-
-步进电机的"额定电压"是绕组电阻 × 额定电流得出的参考值。实际驱动是 PWM 恒流控制，电压只是上限。
-
-| 电机额定电压 | 能不能用 | 说明 |
-|------------|---------|------|
-| 2.5V~5V | ✅ 常见 | 配 VM=4.8V 供电刚好 |
-| 12V | ✅ | 需要 VM ≥12V，否则电流打不到额定值 |
-| 24V | ✅ | 需要 VM ≥24V |
-
-**VM（电机电源）电压决定了电机选型。**
-
-##### 5. 保持扭矩（Holding Torque）
-
-| 电机规格 | 典型扭矩 | 建议 |
-|---------|---------|------|
-| 42 步进（NEMA17） | 0.2~0.6 N·m | 关节 1~3（负载大）选 ≥0.4 N·m |
-| 20 步进（NEMA8） | 0.01~0.05 N·m | 关节 4~6（负载小）选 ≥0.02 N·m |
-
-##### 6. 出轴直径
-
-已测量的减速器尺寸：
-
-| 电机 | 出轴直径 | 减速器输入轴 |
-|------|---------|------------|
-| 42 步进 | Φ5mm | Φ5mm |
-| 20 步进 | Φ5mm（部分 Φ4mm） | Φ3mm |
-
-买之前确认出轴直径和减速器匹配。
-
-#### 三、选购 Checklist
-
-```
-□ 相电流：0.5A ~ 1.5A（推荐 1A 左右）
-□ 步距角：1.8°（200 步/圈）
-□ 线制：4 线 或 6 线
-□ 额定电压：匹配 VM 供电电压
-□ 出轴直径：匹配减速器
-□ 扭矩：按关节负载选
-□ 引线：带引线方便焊接
-```
-
-#### 四、固件可调参数
-
-如果电机参数和默认值不同，固件中可修改（`Ctrl/Motor/motor.h`）：
-
-| 参数 | 默认值 | 说明 |
-|------|--------|------|
-| `steps_per_revolution` | 200 | 1.8°→200，0.9°→400 |
-| `micro_steps` | 256 | 细分数 |
-| `rated_current` | 1000 | 额定电流 mA |
-| `calibration_current` | 2000 | 校准电流 mA |
-
----
-
-### 2026/06/10  xuzhihao-248
-
-**类型**：环境 + 代码
-
-**内容**：Unity 上位机开发环境搭建 + URDF 模型导入 + 关节控制 UI 实现
-
-**前提**：已安装 Unity 2022.3.62f3c1（路径 `E:\programfiles\unityEditor\2022.3.62f3c1`），已有 SolidWorks 导出的 5 轴机械臂 URDF（`D:\code\project\roboticArm\my\urdf\newrobot`）
-
-**相关文件**：`D:\code\project\roboticArmUnity\src\roboticArmStudio\Assets\`
-
-#### 一、环境搭建
-
-| 组件 | 状态 | 版本/路径 |
-|------|------|-----------|
-| VSCode | ✅ 已有 | 1.123.0 |
-| VSCode Unity 扩展 | ✅ 已有 | vstuc 1.2.2 |
-| VSCode C# 扩展 | ✅ 已有 | v2.140.8 |
-| .NET SDK | ✅ 新装 | 6.0.428（`winget install Microsoft.DotNet.SDK.6`） |
-| Unity Editor | ✅ 已有 | 2022.3.62f3c1 |
-| URP 渲染管线 | ✅ 新装 | 通过 Package Manager 安装 Universal RP |
-| URDF-Importer | ✅ 新装 | v0.5.2-preview（手动下载，git URL 方式报错） |
-
-**Unity 项目配置**：
-- 项目名：DummyStudio
-- 模板：3D (URP)
-- External Script Editor：Edit → Preferences → External Tools → Visual Studio Code
-
-#### 二、URDF 导入过程（遇到的问题及解决方案）
-
-##### 问题 1：URDF-Importer git URL 安装失败
-
-**现象**：通过 Package Manager 的 "Add package from git URL" 输入 `https://github.com/Unity-Technologies/URDF-Importer.git` 报错 `does not point to a valid package`
-
-**原因**：URL 缺少包路径参数
-
-**解决方案**：
-- 方法一（推荐）：使用带路径的 URL `https://github.com/Unity-Technologies/URDF-Importer.git?path=/com.unity.robotics.urdf-importer`
-- 方法二：手动下载 Release 包，通过 "Add package from disk" 导入 `package.json`
-
-**最终采用**：手动下载 v0.5.2 到 `D:\BaiduNetdiskDownload\URDF-Importer-0.5.2`，通过 "Add package from disk" 安装
-
-##### 问题 2：`package://` 路径解析错误
-
-**现象**：导入 URDF 时报错 `DirectoryNotFoundException: Could not find a part of the path "...newrobot\urdf\newrobot\meshes\base_link.STL"`
-
-**原因**：URDF 中 `package://newrobot/meshes/base_link.STL` 被导入器解析为相对于 URDF 文件的 `newrobot/meshes/` 子目录，导致路径多了一层 `newrobot`
-
-**尝试过的方案**：
-1. 将 meshes 放到 `Assets/Model/urdf/newrobot/urdf/meshes/` → 仍然报错，路径多了一层
-2. 改 URDF 路径为 `../meshes/` → 导入器警告 "Attempting to replace file path's starting instance of `../` with standard package notation `package://`"，然后又解析错误
-
-**最终解决方案**：将 meshes 文件夹放到导入器期望的位置 `Assets/newrobot/urdf/meshes/`，即：
-```
-Assets/newrobot/
-├── urdf/
-│   ├── newrobot.urdf
-│   └── meshes/        ← STL 文件放这里
-│       ├── base_link.STL
-│       └── ...
-└── meshes/            ← 原来的（可删除）
-```
-
-##### 问题 3：VHACD 碰撞体生成器报错
-
-**现象**：`NullReferenceException: Object reference not set to an instance of an object` 在 `MeshProcess.VHACD.GenerateConvexMeshes`
-
-**原因**：URDF-Importer 0.5.2 的 VHACD（凸分解碰撞体生成器）存在 bug
-
-**解决方案**：去掉 URDF 中所有 `<collision>` 块，只保留 `<visual>` 和 `<inertial>`。碰撞体可以后续在 Unity 中手动添加
-
-##### 问题 4：坐标系混乱，模型显示不正确
-
-**现象**：导入后模型各部件位置混乱，坐标系不对
-
-**原因**：SolidWorks 使用 Z-up 坐标系，Unity 使用 Y-up 坐标系。导入时选了 "Z Axis" 但未正确转换
-
-**解决方案**：导入时选择 **Y Axis** 而不是 Z Axis，模型显示正常
-
-##### 问题 5：Mesh 显示 Missing
-
-**现象**：导入成功后 Hierarchy 中有结构，但每个 link 的 Mesh Filter 显示 missing
-
-**原因**：URDF-Importer 创建了层级结构但未自动绑定网格引用
-
-**解决方案**：手动绑定 —— 选中每个 link 的 Visual 子物体，在 Inspector 中将 Mesh Filter → Mesh 槽拖入 `Assets/newrobot/urdf/meshes/` 中对应的 `.prefab` 文件
-
-#### 三、关节控制实现
-
-##### 问题 6：启动后机械臂坠落
-
-**现象**：点 Play 后机械臂受重力影响直接坠落
-
-**解决方案**：在 base_link 的 Articulation Body 组件中勾选 **Immovable**（或通过脚本 `baseLink.immovable = true`）
-
-##### 问题 7：滑块无法控制关节，关节慢慢下坠
-<video controls src="roboticArmStudio - SampleScene - Windows, Mac, Linux - Unity 2022.3.62f3c1_ _DX11_ 2026-06-10 22-48-05.mp4" title="故障展示"></video>
-
-**现象**：拖动滑块 xDrive.target 值变化，但关节不转动；机械臂在重力下慢慢坠落
+**类型**：
+
+**内容**：通过solidworks测量了电机和减速器的尺寸   3*42步进电机 Φ5mm   3*20步进电机 Φ5mm
+   减速器
+      1*42mm*42mm*32mm Φ10
+      2*30.7mm*30.7mm*26.9mm phi5mm phi9mm
+      3*20mm*20mm*15.2mm  phi3mm  phi5mm
 
 **原因**：
-1. Articulation Body 的 xDrive 参数（stiffness/damping/forceLimit）全部为 0
-2. 在 `Start()` 中设置 xDrive 会被 Unity 2022 的物理引擎重置
 
-**尝试过的方案**：
-1. 在 `Start()` 中设置 xDrive → 无效，值仍为 0
-2. 创建独立的 JointInitializer 脚本 → 同样无效
-
-**最终解决方案**：
-1. 使用 **协程延迟两帧** 初始化（`yield return null` 两次），绕过 Unity 2022 的物理引擎重置问题
-2. 大幅提高驱动参数：stiffness=100000, damping=10000, forceLimit=10000
-3. 设置关节约束：`twistLock = LimitedMotion`, `swingYLock = LockedMotion`, `swingZLock = LockedMotion`
-
-##### 问题 8：continuous 类型关节无法控制
-
-**现象**：revolute 关节（J2/J3/J5）正常工作，但 continuous 关节（J1/J4）不响应
-
-**原因**：continuous 关节不应设为 `LimitedMotion`，需要 `FreeMotion`
-
-**解决方案**：区分关节类型：
-- continuous 关节：`twistLock = ArticulationDofLock.FreeMotion`
-- revolute 关节：`twistLock = ArticulationDofLock.LimitedMotion`
-- 所有关节：`swingYLock = swingZLock = LockedMotion`
-
-#### 四、最终实现的功能
-
-| 功能 | 状态 | 说明 |
-|------|------|------|
-| URDF 模型加载 | ✅ | 5 轴机械臂 3D 模型正确显示 |
-| 关节控制 UI | ✅ | 5 个 UGUI 滑块，TextMeshPro 显示角度值 |
-| 关节物理驱动 | ✅ | ArticulationBody + xDrive，刚度/阻尼足够 |
-| 正运动学显示 | ✅ | 实时显示末端执行器 XYZ + 姿态 |
-| URP 渲染 | ✅ | 手动创建材质绑定到各 link |
-
-#### 五、关键代码文件
-
-| 文件 | 说明 |
-|------|------|
-| `Assets/Scripts/UI/JointControlPanel.cs` | 关节控制面板：滑块绑定、驱动参数初始化、底座固定 |
-| `Assets/Scripts/Kinematics/ForwardKinematics.cs` | 正运动学：读取末端 Transform 显示位姿 |
-| `Assets/Scripts/UI/JointInitializer.cs` | 早期版本，已合并到 JointControlPanel |
-
-#### 六、URDF 关节配置（从文件读取）
-
-| 关节 | 类型 | 轴方向 | 角度限位 | 原点偏移 (xyz m) | 原点旋转 (rpy rad) |
-|------|------|--------|----------|-------------------|---------------------|
-| joint1 (base→link1) | continuous | (0,0,-1) | 无限制 | 0, 0, 0.0735 | 0, 0, 0 |
-| joint2 (link1→link2) | revolute | (0,0,-1) | -60° ~ 60° | 0.035, -0.02, 0.0355 | π/2, 0, 0 |
-| joint3 (link2→link3) | revolute | (0,0,-1) | -60° ~ 60° | 0, 0.146, 0.00015 | 0, 0, π/2 |
-| joint4 (link3→link4) | continuous | (0,0,-1) | 无限制 | 0.052, 0.012, -0.02015 | π/2, 0, 0 |
-| joint5 (link4→link5) | revolute | (0,0,1) | -120° ~ 120° | 0, 0.0068, 0.127 | π/2, -π/2, 0 |
-
-#### 七、待办
-
-- [ ] 串口通信层（SerialTransport）实现
-- [ ] 逆运动学（IK）拖拽控制
-- [ ] J6 轴 + Hand 末端执行器补充
-- [ ] 预设姿态管理
-- [ ] 数据监控面板
+**相关文件**：
 
 ---
 
-### 2026/06/11  xuzhihao-248
+### 2026/06/15  xuzhihao-248
 
-**类型**：代码
+**类型**：代码 + 环境
 
-**内容**：Unity 上位机房间场景导入 + 开始界面 + 摄像头飞入动画
+**内容**：6 轴机械臂 URDF 导出 → ROS2 转换 → Unity 导入 → 6 关节仿真全流程踩坑记录
 
-**前提**：URDF 模型和滑块控制 UI 已跑通（06/10），手机 3D Scanner App 扫描了实验室房间
+**原因**：从 5 轴升级到 6 轴，SolidWorks 导出和 Unity 导入过程中遇到大量问题，统一记录
 
-**完成事项**：
+**相关文件**：`D:\code\project\roboticArm\my\urdf\selfModel\`、`D:\code\project\roboticArmUnity\src\roboticArmStudio\`
 
-1. **房间场景导入**：3D Scanner App 导出 OBJ+MTL+JPG 格式，拖入 Unity `Assets/Models/Room/`，Extract Materials 后 Shader 改为 URP/Lit
-2. **开始界面**：在现有 Canvas 下新建 StartPanel（全屏半透明 + "开始调试"按钮）
-3. **摄像头飞入动画**：新建 3 个脚本实现状态机 + 变速飞行
-   - `GameController.cs`：管理 Start → Flying → Control 三个状态，控制 UI 面板显隐
-   - `CameraFlythrough.cs`：沿路径点变速飞行，AnimationCurve 缓动（默认 EaseInOut）
-   - `StartMenu.cs`：按钮点击触发状态切换和飞入
-4. **路径点配置**：3 个空 GameObject（门口 → 过渡 → 机械臂前），坐标在 Inspector 中微调
+#### 一、SolidWorks URDF 导出踩坑
 
-**3D Scanner App 导出说明**：
-- 导出选 OBJ 格式（贴图独立，方便修改）
-- 文件组成：`.obj` + `.mtl` + `.jpg`
-- Unity 导入后需：Extract Materials → Shader 改 URP/Lit → 重新指定贴图
-- Scale Factor 按实际调整（扫描模型单位通常不是米）
+| # | 问题 | 原因 | 解决 |
+|---|------|------|------|
+| 1 | STL 文件只有 84 字节（空壳） | 零件是**虚拟组件**，内嵌在装配体中，Exporter 无法正确导出 | 右键零件 → **设为外部**，保存为独立 .SLDPRT 文件 |
+| 2 | 设为外部后 Exporter 仍然导出空 STL | Exporter 里 Components 绑定的引用失效 | 在 Exporter 中**重新绑定**每个 link 的 Components |
+| 3 | 共享违例（Sharing Violation） | 之前导出的文件被占用，或零件是**轻化加载** | ① 工具 → 选项 → 性能 → 取消"自动以轻化方式装入零部件" ② 导出到**全新空文件夹** |
+| 4 | 解散子装配体后缺少零件 | 子装配体里的零件散开后未分配到 link | 在 Exporter 中检查每个 link 的 Components 是否都有零件 |
+| 5 | Pack and Go 没拆出零件 | 虚拟组件不会被 Pack and Go 拆出 | 必须先**设为外部**再操作 |
+| 6 | "保存装配体在外部文件中"弹出警告 | 多个零部件保存到同一位置，正常提示 | 直接点确定，不影响 |
 
-**相关文件**：`D:\code\project\roboticArmUnity\src\roboticArmStudio\Assets\Scripts\`
+**关键经验**：
+- 虚拟组件是万坑之源，SolidWorks 导出 URDF 前务必先把所有零件**设为外部**
+- STL 文件大小是最快的验证手段：84 字节 = 空壳，几 KB+ = 正常
+- 解散子装配体后要逐个检查 Exporter 中每个 link 的 Components 绑定
+
+#### 二、Unity URDF 导入踩坑
+
+| # | 问题 | 原因 | 解决 |
+|---|------|------|------|
+| 7 | meshes missing（路径错误） | URDF 中 `package://myModel/meshes/` 被 URDF-Importer 解析为相对于 URDF 文件的路径，多了一层 | meshes 文件夹放到 `urdf/myModel/` 子目录下，匹配 `package://` 路径 |
+| 8 | VHACD 碰撞体报错（NullReferenceException） | 勾选了 Collision 选项 | 导入时**去掉 Collision 勾选**，Demo 阶段不需要碰撞 |
+| 9 | joint5 导入后旋转了 180° | rpy=(90°, -90°, 0) 在坐标系转换后等效于 Z 轴转 180° | Unity Inspector 中手动修正旋转值 |
+| 10 | 零件没有颜色 | URDF 中 `material name=""`（空名字），Importer 处理异常 | Unity 里手动创建材质球绑定到各 link |
+
+#### 三、Unity 物理仿真踩坑
+
+| # | 问题 | 原因 | 解决 |
+|---|------|------|------|
+| 11 | 机械臂下坠、运动缓慢 | stiffness/damping 太低（100），关节撑不住重力 | stiffness=**100000**，damping=**10000**，forceLimit=**500** |
+| 12 | continuous 关节（J1/J4/J6）依然下坠 | stiffness 对 continuous 关节无效（FreeMotion 模式下 xDrive 不起作用） | 设置 ArticulationBody 的 `angularDamping=100` 阻尼 |
+| 13 | `maxVelocity` 编译报错 | Unity 2022.3 的 ArticulationDrive **没有 maxVelocity 属性** | 去掉该字段，用 damping 间接控制速度（damping/stiffness 比值） |
+| 14 | 驱动模式不对 | 默认驱动模式可能不是位置控制 | 显式设置 `driveType = ArticulationDriveType.Target` |
+
+**ArticulationBody 关键参数参考**：
+
+| 参数 | revolute 关节 | continuous 关节 |
+|------|--------------|----------------|
+| twistLock | LimitedMotion | FreeMotion |
+| swingYLock | LockedMotion | LockedMotion |
+| swingZLock | LockedMotion | LockedMotion |
+| xDrive.stiffness | 100000 | 100000 |
+| xDrive.damping | 10000 | 10000 |
+| xDrive.forceLimit | 500 | 500 |
+| xDrive.driveType | Target | Target |
+| angularDamping | 0 | 100 |
+
+#### 四、Unity UI 交互踩坑
+
+| # | 问题 | 原因 | 解决 |
+|---|------|------|------|
+| 15 | 拖滑块时摄像机跟着转 | 鼠标点在 UI 上也被 CameraOrbit 检测为拖拽输入 | 加 `EventSystem.current.IsPointerOverGameObject()` 判断，UI 上的输入忽略；触摸屏需传入 fingerId |
+
+#### 五、ROS1 → ROS2 转换（标准流程）
+
+每次 SolidWorks 导出的 URDF 都是 ROS1 格式，需转换：
+
+1. `package.xml`：format 改为 3，catkin → ament_cmake，rviz → rviz2，删除 gazebo/roslaunch 依赖
+2. `CMakeLists.txt`：替换为 5 行 ament_cmake 模板（printf 写入，避免 Windows 换行符）
+3. `launch/display.launch.py`：新建 ROS2 Python launch
+4. 删除 ROS1 遗留文件（display.launch、gazebo.launch、export.log）
+5. URDF 文件本身不需要改（`package://包名/meshes/` 路径已正确）
 
 ---
-
-### 2026/06/11  xuzhihao-248
-
-**类型**：代码
-
-**内容**：Unity 上位机通信层实现（T-09 ~ T-12），完整链路跑通
-
-**前提**：URDF 模型 + 滑块控制 + 房间场景 + 开始界面已就绪
-
-**完成事项**：
-
-1. **T-09 通信抽象接口**：
-   - `ITransport.cs`：接口定义（Connect/Disconnect/Send/OnDataReceived）
-   - `SimulatedTransport.cs`：模拟实现，支持关节指令 `>j1,j2,...`、查询 `#GETJPOS`/`#GETLPOS`、使能/急停等
-
-2. **T-10 通信管理器**：
-   - `TransportManager.cs`：单例，持有 ITransport 实例，统一转发收发数据，支持运行时切换传输层
-
-3. **T-11 UI 与通信整合**：
-   - `JointControlPanel.cs` 新增 `enableTransport` 开关，滑块变化时自动通过 TransportManager 发送 `>j1,j2,...` 指令
-   - `TransportPanel.cs`：连接状态 UI（状态文本 + 连接/断开按钮）
-
-4. **T-12 姿态同步**：
-   - `PoseSync.cs`：每 100ms 发送 `#GETJPOS` 查询，收到响应后解析角度并更新 ArticulationBody.xDrive
-
-**通信链路**：
-```
-滑块 → JointControlPanel → TransportManager.Send(">90,0,...")
-  → SimulatedTransport（存储角度）→ 响应 "J:90.0,0.0,..."
-  → PoseSync 解析 → 更新模型关节
-```
-
-**设计原则**：Demo 阶段用 SimulatedTransport 验证架构，后续接硬件只需新增 SerialTransport 实现 ITransport，其他代码不动。
-
-**新增脚本**：
-
-| 文件 | 功能 |
-|------|------|
-| `Assets/Scripts/Communication/ITransport.cs` | 传输层抽象接口 |
-| `Assets/Scripts/Communication/SimulatedTransport.cs` | 模拟传输实现 |
-| `Assets/Scripts/Communication/TransportManager.cs` | 通信管理器单例 |
-| `Assets/Scripts/Sync/PoseSync.cs` | 姿态同步（定时查询+更新模型） |
-| `Assets/Scripts/UI/TransportPanel.cs` | 连接状态 UI |
-
-**相关文件**：`D:\code\project\roboticArmUnity\src\roboticArmStudio\Assets\Scripts\`

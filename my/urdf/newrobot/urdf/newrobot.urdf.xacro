@@ -1,0 +1,192 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="newrobot">
+
+  <!-- ============================================================
+       newrobot - 5-axis robotic arm
+       Originally exported from SolidWorks via sw_urdf_exporter
+       Converted to xacro for ROS2 Humble
+
+       Usage:
+         ros2 launch newrobot display.launch.py
+         # or load xacro directly:
+         xacro newrobot.urdf.xacro
+       ============================================================ -->
+
+  <!-- Global properties (can be overridden when including) -->
+  <xacro:property name="base_height" value="0.0735"/>
+  <xacro:property name="link2_offset_x" value="0.035"/>
+  <xacro:property name="link2_offset_y" value="-0.02"/>
+  <xacro:property name="link2_offset_z" value="0.0355"/>
+  <xacro:property name="link3_offset_y" value="0.146"/>
+  <xacro:property name="link3_offset_z" value="0.00015"/>
+  <xacro:property name="link4_offset_x" value="0.052"/>
+  <xacro:property name="link4_offset_y" value="0.012"/>
+  <xacro:property name="link4_offset_z" value="-0.02015"/>
+  <xacro:property name="link5_offset_y" value="0.0068"/>
+  <xacro:property name="link5_offset_z" value="0.127"/>
+
+  <!-- Default gray material -->
+  <xacro:macro name="default_material" params="name:=gray">
+    <material name="${name}">
+      <color rgba="0.752941176470588 0.752941176470588 0.752941176470588 1"/>
+    </material>
+  </xacro:macro>
+
+  <!-- ===================== Links ===================== -->
+
+  <link name="base_link">
+    <inertial>
+      <origin xyz="0.00261939095793032 8.05598235953691E-07 0.0408606707237568" rpy="0 0 0"/>
+      <mass value="0.462567248284449"/>
+      <inertia ixx="0.000631412409093947" ixy="3.87578588377488E-11" ixz="2.47671577126192E-06"
+               iyy="0.000553460390056141" iyz="-9.66892035394983E-10" izz="0.000690292260338216"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="package://newrobot/meshes/base_link.STL"/></geometry>
+      <xacro:default_material/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="package://newrobot/meshes/base_link.STL"/></geometry>
+    </collision>
+  </link>
+
+  <link name="link1">
+    <inertial>
+      <origin xyz="0.0056565029784485 0.00561558713076425 0.0190368428015739" rpy="0 0 0"/>
+      <mass value="0.0521371956044282"/>
+      <inertia ixx="1.93676847010315E-05" ixy="-7.14737321498401E-06" ixz="-5.11088397003481E-06"
+               iyy="2.26036907617628E-05" iyz="-3.2819850575291E-06" izz="3.19827133625892E-05"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="package://newrobot/meshes/link1.STL"/></geometry>
+      <xacro:default_material/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="package://newrobot/meshes/link1.STL"/></geometry>
+    </collision>
+  </link>
+
+  <link name="link2">
+    <inertial>
+      <origin xyz="0.00206174782362262 0.0711069722145173 -0.0157233785349188" rpy="0 0 0"/>
+      <mass value="0.318866195314794"/>
+      <inertia ixx="0.000534524375753353" ixy="1.21533345653749E-06" ixz="-1.4253079872442E-06"
+               iyy="0.00010406346155846" iyz="3.83306753651922E-05" izz="0.000534917411917907"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="package://newrobot/meshes/link2.STL"/></geometry>
+      <xacro:default_material/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="package://newrobot/meshes/link2.STL"/></geometry>
+    </collision>
+  </link>
+
+  <link name="link3">
+    <inertial>
+      <origin xyz="0.044754941106177 0.0227550231504386 -0.0153462357219425" rpy="0 0 0"/>
+      <mass value="0.0651989298221985"/>
+      <inertia ixx="1.48369365540213E-05" ixy="-3.4322889070454E-06" ixz="5.20639995254676E-06"
+               iyy="2.59127251079158E-05" iyz="2.0349264318829E-06" izz="2.0069188128937E-05"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="package://newrobot/meshes/link3.STL"/></geometry>
+      <xacro:default_material/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="package://newrobot/meshes/link3.STL"/></geometry>
+    </collision>
+  </link>
+
+  <link name="link4">
+    <inertial>
+      <origin xyz="0.0002309228879947 -0.0082886012125518 0.0740096634382911" rpy="0 0 0"/>
+      <mass value="0.0632881256112504"/>
+      <inertia ixx="4.17196450828295E-05" ixy="3.3500120128033E-08" ixz="2.90801167092427E-07"
+               iyy="4.32987166338459E-05" iyz="-2.14997732003966E-06" izz="6.1940654051469E-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="package://newrobot/meshes/link4.STL"/></geometry>
+      <xacro:default_material/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="package://newrobot/meshes/link4.STL"/></geometry>
+    </collision>
+  </link>
+
+  <link name="link5">
+    <inertial>
+      <origin xyz="0.0399750246512569 2.02018813580396E-05 -0.00228749468803351" rpy="0 0 0"/>
+      <mass value="0.0280030535897929"/>
+      <inertia ixx="1.68485188743037E-06" ixy="1.52011281167684E-09" ixz="1.48138109731109E-07"
+               iyy="6.90773715268084E-06" iyz="-2.40768628082935E-10" izz="7.22850860230252E-06"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="package://newrobot/meshes/link5.STL"/></geometry>
+      <xacro:default_material/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><mesh filename="package://newrobot/meshes/link5.STL"/></geometry>
+    </collision>
+  </link>
+
+  <!-- ===================== Joints ===================== -->
+
+  <joint name="joint1" type="continuous">
+    <origin xyz="0 0 ${base_height}" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="link1"/>
+    <axis xyz="0 0 -1"/>
+    <limit effort="50" velocity="3.14"/>
+    <dynamics damping="0.1" friction="0.1"/>
+  </joint>
+
+  <joint name="joint2" type="revolute">
+    <origin xyz="${link2_offset_x} ${link2_offset_y} ${link2_offset_z}" rpy="1.5708 0 0"/>
+    <parent link="link1"/>
+    <child link="link2"/>
+    <axis xyz="0 0 -1"/>
+    <limit lower="-1.047" upper="1.047" effort="50" velocity="3.14"/>
+    <dynamics damping="0.1" friction="0.1"/>
+  </joint>
+
+  <joint name="joint3" type="revolute">
+    <origin xyz="0 ${link3_offset_y} ${link3_offset_z}" rpy="0 0 1.5708"/>
+    <parent link="link2"/>
+    <child link="link3"/>
+    <axis xyz="0 0 -1"/>
+    <limit lower="-1.047" upper="1.047" effort="50" velocity="3.14"/>
+    <dynamics damping="0.1" friction="0.1"/>
+  </joint>
+
+  <joint name="joint4" type="continuous">
+    <origin xyz="${link4_offset_x} ${link4_offset_y} ${link4_offset_z}" rpy="1.5708 0 0"/>
+    <parent link="link3"/>
+    <child link="link4"/>
+    <axis xyz="0 0 -1"/>
+    <limit effort="50" velocity="3.14"/>
+    <dynamics damping="0.1" friction="0.1"/>
+  </joint>
+
+  <joint name="joint5" type="revolute">
+    <origin xyz="0 ${link5_offset_y} ${link5_offset_z}" rpy="1.5708 -1.5708 0"/>
+    <parent link="link4"/>
+    <child link="link5"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-2.094" upper="2.094" effort="50" velocity="3.14"/>
+    <dynamics damping="0.1" friction="0.1"/>
+  </joint>
+
+</robot>
