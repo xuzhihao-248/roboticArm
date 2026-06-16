@@ -1184,3 +1184,627 @@ for (float t = 0; t <= 1; t += 0.1f)
    - `resumeColor` = 绿色
 
 ---
+
+### 2026/06/16  xuzhihao-248
+
+**类型**：代码
+
+**内容**：Unity 上位机第三阶段开发任务清单（4项）
+
+**原因**：上位机基础功能已完成（URDF导入、滑块控制、通信、碰撞检测、急停），进入功能完善阶段
+
+**相关文件**：`D:\code\project\roboticArmUnity\src\roboticArmStudio\Assets\Scripts\`
+
+---
+
+#### 任务清单
+
+| # | 任务 | 优先级 | 状态 |
+|---|------|--------|------|
+| T-E | FK 旋转归零修复 | 高 | ⬜ 待做 |
+| T-F | 日志显示面板（可折叠） | 中 | ⬜ 待做 |
+| T-G | Slider 子级高亮 | 中 | ⬜ 待做 |
+| T-H | 外部配置文档 | 中 | ⬜ 待做 |
+| T-I | 关节移动逻辑改造（待评估） | 低 | 📝 待办 |
+
+---
+
+#### T-E：FK 旋转归零修复
+
+**为什么要修**：
+ForwardKinematics.cs 的旋转归零使用欧拉角直接减法（`rot -= rotationOffset`），这在 3D 旋转中是错误的。欧拉角受万向锁、旋转顺序、0~360 环绕影响，直接减法没有物理意义。导致归位/初始化时位置正确但旋转显示 `Rx 0.5, Ry -117.22, Rz 117.22`。
+
+**计划实现**：
+1. 将 `rotationOffset` 从 `Vector3` 改为 `Quaternion`
+2. `Start()` 和 `Zero()` 中记录 `rotationOffset = endEffector.rotation`
+3. `Update()` 中用四元数计算相对旋转：
+   ```csharp
+   Quaternion relativeRot = Quaternion.Inverse(rotationOffset) * endEffector.rotation;
+   Vector3 rot = relativeRot.eulerAngles;
+   ```
+4. 位置偏移保持不变（位置是线性的，减法正确）
+
+**验收标准**：
+- 启动时（所有关节 0°），XYZ ≈ 0，Rx/Ry/Rz ≈ 0
+- 归位后（Home → 所有关节 0°），XYZ ≈ 0，Rx/Ry/Rz ≈ 0
+- 拖动任意关节后，显示数值随末端姿态变化，数值合理
+
+**相关文件**：`Assets/Scripts/Kinematics/ForwardKinematics.cs`
+
+---
+
+#### T-F：日志显示面板（可折叠）
+
+**为什么要加**：
+当前通信指令（发送/接收）无可视化，调试时只能看终端。闭环控制中 PoseSync 持续查询姿态，日志量大，需要节流去重。碰撞检测结果也需要直观显示。
+
+**计划实现**：
+
+1. **UI 结构**：
+   - 右侧边缘一个小箭头按钮（`◀` / `▶`）
+   - 点击弹出日志面板（带滑动条的 ScrollView）
+   - 再次点击收起
+   - 动画过渡（滑入/滑出）
+
+2. **日志脚本 `LogPanel.cs`**：
+   - 单例模式，全局访问
+   - `AddLog(string message, LogType type)` 方法
+   - `LogType` 枚举：`Info`（白色）、`Warning`（黄色）、`Error`（红色）、`System`（灰色）
+
+3. **节流策略**：
+   - 日志缓冲区 + 定时刷新（每 200ms 刷新一次 UI）
+   - 相同消息合并显示 + 计数：`>10,0,0,0,0,0 (×15)`
+   - 最多显示最近 100 条，超出自动移除最旧
+
+4. **日志来源**：
+   - TransportManager：发送/接收的指令
+   - CollisionGuard：碰撞检测结果（黄色=接近限位，红色=碰撞警告）
+   - TransportPanel：连接/断开系统消息
+   - EmergencyStop：急停/恢复消息
+
+5. **颜色规则**：
+   - 白色：正常通信（发送/接收指令）
+   - 灰色：系统消息（已连接、已断开）
+   - 黄色：接近限位（安全等级 1）
+   - 红色：碰撞警告 / 急停（安全等级 2）
+
+**验收标准**：
+- 右侧小箭头可见，点击弹出/收起日志面板
+- 日志面板显示发送、接收、系统消息
+- 相同指令不重复显示，而是合并 + 计数
+- 碰撞检测未通过时，对应日志显示黄色或红色
+- 日志刷新不影响实际通信频率
+- 面板可滚动查看历史日志
+
+**相关文件**：
+- 新建：`Assets/Scripts/UI/LogPanel.cs`
+- 修改：`Assets/Scripts/Communication/TransportManager.cs`（添加日志输出）
+- 修改：`Assets/Scripts/Safety/CollisionGuard.cs`（添加日志输出）
+
+---
+
+#### T-G：Slider 子级高亮
+
+**为什么要加**：
+拖动某个关节时，用户需要直观看到哪些部件会随之运动。当前没有视觉反馈，操作体验不直观。
+
+**计划实现**：
+
+1. **URDF 关节链**：`base_link → J1 → J2 → J3 → J4 → J5 → J6`
+   - 拖 J1：J1~J6 全部高亮
+   - 拖 J3：J3~J6 高亮，J1/J2/base 不变
+   - 基座永远不高亮
+
+2. **高亮脚本 `JointHighlighter.cs`**：
+   - 引用所有关节的 ArticulationBody 和对应的 MeshRenderer
+   - `HighlightFromJoint(int jointIndex)`：高亮该关节及所有子级
+   - `ClearHighlight()`：清除所有高亮
+   - 高亮方式：URP 自发光（Emission），边缘描边效果
+
+3. **触发逻辑**：
+   - JointControlPanel 的滑块 `OnPointerDown` → 调用 `HighlightFromJoint(i)`
+   - 滑块 `OnPointerUp` → 调用 `ClearHighlight()`
+   - 只在拖动过程中高亮，松开立即消失
+
+4. **材质方案**：
+   - 运行时复制材质（不修改原始材质）
+   - 高亮时启用 Emission：`material.EnableKeyword("_EMISSION")`
+   - 取消时禁用：`material.DisableKeyword("_EMISSION")`
+
+**验收标准**：
+- 拖动 J1 滑块时，J1~J6 的 3D 模型边缘高亮发光，基座不变
+- 拖动 J4 滑块时，只有 J4~J6 高亮
+- 松开鼠标后高亮立即消失
+- UI 滑块本身不高亮
+- 高亮不影响机械臂运动和通信
+
+**相关文件**：
+- 新建：`Assets/Scripts/UI/JointHighlighter.cs`
+- 修改：`Assets/Scripts/UI/JointControlPanel.cs`（添加高亮触发）
+
+---
+
+#### T-H：外部配置文档
+
+**为什么要提取**：
+当前参数散落在各脚本的 Inspector 中，打包后无法修改。后续用其他程序（Python 脚本、另一个上位机）调整参数时需要读写外部文件。打包后也能修改才有意义。
+
+**计划实现**：
+
+1. **文件位置**：`StreamingAssets/config.json`
+   - Unity 打包后，`StreamingAssets` 目录保持可访问
+   - 路径：`Application.streamingAssetsPath + "/config.json"`
+
+2. **格式**：JSON（Unity 原生支持 JsonUtility，无需额外依赖）
+
+3. **配置结构**：
+   ```json
+   {
+     "joints": {
+       "j1": { "min": -360, "max": 360, "type": "continuous" },
+       "j2": { "min": -73,  "max": 73,  "type": "revolute" },
+       "j3": { "min": -60,  "max": 60,  "type": "revolute" },
+       "j4": { "min": -360, "max": 360, "type": "continuous" },
+       "j5": { "min": -120, "max": 120, "type": "revolute" },
+       "j6": { "min": -360, "max": 360, "type": "continuous" }
+     },
+     "drive": {
+       "stiffness": 100,
+       "damping": 20,
+       "forceLimit": 20,
+       "driveType": "Force"
+     },
+     "collision": {
+       "groundY": 0,
+       "safetyMargin": 0.02,
+       "enableCollisionCheck": true,
+       "endEffectorOffset": { "x": 0, "y": 0, "z": 0 }
+     },
+     "ui": {
+       "maxDelta": 10,
+       "homeDuration": 1.5,
+       "syncInterval": 0.1,
+       "logRefreshRate": 0.2,
+       "highlightColor": { "r": 1, "g": 1, "b": 0, "a": 0.3 }
+     },
+     "scene": {
+       "backgroundColor": { "r": 0.15, "g": 0.15, "b": 0.15 },
+       "gridSize": 10,
+       "gridSpacing": 1,
+       "gridColor": { "r": 0.35, "g": 0.35, "b": 0.35 }
+     },
+     "communication": {
+       "port": "SIMULATED",
+       "baudRate": 115200,
+       "timeout": 1.0
+     }
+   }
+   ```
+
+4. **加载逻辑**：
+   - `ConfigManager.cs` 单例，启动时加载 `StreamingAssets/config.json`
+   - 文件不存在则使用默认值并自动创建
+   - 各脚本从 ConfigManager 读取参数，不再硬编码
+
+5. **热更新**：
+   - 监听文件变化（可选），或提供 `Reload()` 方法
+   - 其他程序修改 JSON 后，Unity 调用 `Reload()` 即可生效
+
+**验收标准**：
+- `StreamingAssets/config.json` 文件存在，格式正确
+- 修改 JSON 中的参数（如关节限位），重启 Unity 后生效
+- 删除 config.json 后，程序使用默认值正常运行，并自动创建新 config.json
+- 各脚本不再硬编码参数，统一从 ConfigManager 读取
+- 打包后 config.json 可被外部程序修改，重启后生效
+
+**相关文件**：
+- 新建：`Assets/Scripts/Config/ConfigManager.cs`
+- 新建：`Assets/StreamingAssets/config.json`
+- 修改：`Assets/Scripts/UI/JointControlPanel.cs`（读取配置）
+- 修改：`Assets/Scripts/UI/JointInitializer.cs`（读取配置）
+- 修改：`Assets/Scripts/Safety/CollisionGuard.cs`（读取配置）
+- 修改：`Assets/Scripts/Scene/DarkGridSetup.cs`（读取配置）
+
+---
+
+#### T-I：关节移动逻辑改造（待评估）
+
+**为什么要做**：
+当前滑块移动速度 = 关节移动速度，拖快了关节也快。后续接入真实硬件时，通信速率有限（CAN 100Hz），快速拖动可能产生大量指令堆积。需要改为固定速率 + 滑块作为目标值。
+
+**待评估内容**：
+1. 当前物理引擎驱动模式（Force/Target）是否支持速度限制
+2. 改为固定速率后，滑块实时性是否受影响
+3. 硬件端是否需要额外的速度限制逻辑
+4. 对现有架构（JointControlPanel → PoseSync → TransportManager）的影响
+
+**当前状态**：📝 仅记录，暂不实施
+
+**验收标准**：待评估后确定
+
+---
+
+### 2026/06/16  xuzhihao-248
+
+**类型**：代码
+
+**内容**：T-E 任务完成——FK 旋转归零修复
+
+**原因**：ForwardKinematics.cs 的旋转归零使用欧拉角直接减法，导致归位/初始化时旋转显示错误（Rx 0.5, Ry -117.22, Rz 117.22）
+
+**相关文件**：`Assets/Scripts/Kinematics/ForwardKinematics.cs`
+
+#### 问题根因
+
+原代码第 37 行：
+```csharp
+rot -= rotationOffset;  // 欧拉角直接减法，错误！
+```
+
+欧拉角不能直接做减法，原因：
+1. 旋转是三维空间中的非线性变换
+2. 欧拉角受万向锁（Gimbal Lock）影响
+3. 旋转顺序（XYZ vs ZYX）会影响结果
+4. Unity 的 `eulerAngles` 返回 [0, 360) 范围，减法会产生环绕错误
+
+#### 修复方案
+
+**核心思路**：用四元数（Quaternion）计算相对旋转，再转欧拉角显示。
+
+**修改内容**：
+
+1. **字段类型**：`rotationOffset` 从 `Vector3` 改为 `Quaternion`
+   ```csharp
+   // 修改前
+   public Vector3 rotationOffset;
+   // 修改后
+   private Quaternion rotationOffset = Quaternion.identity;
+   ```
+
+2. **记录偏移**：`Start()` 和 `Zero()` 中用 `endEffector.rotation`（四元数）
+   ```csharp
+   // 修改前
+   rotationOffset = endEffector.eulerAngles;
+   // 修改后
+   rotationOffset = endEffector.rotation;
+   ```
+
+3. **计算相对旋转**：`Update()` 中用四元数逆运算
+   ```csharp
+   // 修改前
+   rot -= rotationOffset;
+   // 修改后
+   Quaternion relativeRot = Quaternion.Inverse(rotationOffset) * endEffector.rotation;
+   rot = relativeRot.eulerAngles;
+   ```
+
+4. **重置偏移**：`ResetOffset()` 中用 `Quaternion.identity`
+   ```csharp
+   // 修改前
+   rotationOffset = Vector3.zero;
+   // 修改后
+   rotationOffset = Quaternion.identity;
+   ```
+
+#### 验收结果
+
+- ✅ 启动时（所有关节 0°），XYZ ≈ 0，Rx/Ry/Rz ≈ 0
+- ✅ 归位后（Home → 所有关节 0°），XYZ ≈ 0，Rx/Ry/Rz ≈ 0
+- ✅ 拖动任意关节后，显示数值随末端姿态变化，数值合理
+- ✅ 位置偏移保持不变（位置是线性变换，减法正确）
+
+#### 精度验证
+
+**实测数据**（所有关节 0° 时）：
+```
+X: 0.000  Y: -0.001  Z: 0.000
+Rx: -0.2°  Ry: 0.5°  Rz: 0.0°
+```
+
+**精度分析**：
+
+| 维度 | 上位机精度 | 实际需求 | 硬件精度 | 结论 |
+|------|-----------|---------|---------|------|
+| 位置 | 0.001 mm | ±0.5 mm | 编码器 0.022° | ✅ 远超需求 |
+| 旋转 | 0.2°~0.5° | ±1° | FOC 闭环 ~0.1° | ✅ 够用 |
+
+**误差来源**：
+- Unity 物理引擎浮点迭代截断误差
+- 四元数→欧拉角转换精度损失
+- 仿真环境固有特性，非代码 bug
+
+**对硬件的影响**：
+- 上位机误差仅影响显示，不影响实际控制
+- 硬件端有编码器闭环，精度不依赖 Unity 显示值
+- 上位机职责是"告诉硬件去哪里"，硬件负责"精确到达"
+
+#### 显示优化
+
+**问题**：Unity `eulerAngles` 返回 [0, 360) 范围，359.8° 实际是 -0.2°
+
+**解决**：将 [0, 360) 转换为 [-180, 180) 范围显示
+```csharp
+float rx = rot.x > 180f ? rot.x - 360f : rot.x;
+float ry = rot.y > 180f ? rot.y - 360f : rot.y;
+float rz = rot.z > 180f ? rot.z - 360f : rot.z;
+```
+
+#### 知识点
+
+**为什么位置可以用减法，旋转不行？**
+
+- 位置是线性空间：A - B = C，表示从 B 到 C 的位移
+- 旋转是非线性空间：旋转 90° + 旋转 90° = 旋转 180°，但欧拉角 (90,0,0) + (90,0,0) ≠ (180,0,0)
+- 四元数是旋转的正确数学表示：`Quaternion.Inverse(A) * B` = 从 A 到 B 的相对旋转
+
+**参考资料**：
+- Unity 官方文档：Quaternion.Inverse
+- 欧拉角与四元数的区别：https://docs.unity3d.com/Manual/QuaternionAndEulerRotationFormats.html
+
+---
+
+### 2026/06/16  xuzhihao-248
+
+**类型**：代码
+
+**内容**：T-E 任务完成 + T-F 任务搁置 + 归位功能修复
+
+**原因**：Unity 上位机第三阶段开发
+
+**相关文件**：`D:\code\project\roboticArmUnity\src\roboticArmStudio\Assets\Scripts\`
+
+#### 一、T-E：FK 旋转归零修复（✅ 已完成）
+
+**问题**：ForwardKinematics.cs 的旋转归零使用欧拉角直接减法，导致归位/初始化时旋转显示错误（Rx 0.5, Ry -117.22, Rz 117.22）
+
+**修复**：
+- `rotationOffset` 从 `Vector3` 改为 `Quaternion`
+- `Update()` 中用 `Quaternion.Inverse(rotationOffset) * endEffector.rotation` 计算相对旋转
+- 位置偏移保持不变（线性变换，减法正确）
+
+**验收**：启动和归位后，Rx/Ry/Rz 显示 ≈0（如 -0.2°, 0.5°, 0.0°）
+
+**相关文件**：`Assets/Scripts/Kinematics/ForwardKinematics.cs`
+
+#### 二、T-F：日志显示面板（⬜ 搁置）
+
+**问题**：日志面板导致 Unity 卡顿/卡死
+
+**尝试过的方案**：
+1. ❌ 为每条日志 Instantiate 新 GameObject → 频繁创建/销毁导致 GC 压力
+2. ❌ 使用对象池 → 仍有性能问题
+3. ❌ 单个 TextMeshProUGUI 显示所有日志 → 仍卡顿
+4. ❌ Canvas.ForceUpdateCanvases() → 强制刷新 UI 布局，开销极大
+5. ❌ Destroy() vs DestroyImmediate() → Destroy() 不立即减少 childCount，导致死循环
+
+**搁置原因**：
+- 日志刷新频率过高（每 0.2-0.5 秒）
+- 连接后 PoseSync 每 0.1 秒发送 #GETJPOS，产生大量日志
+- UI 渲染开销过大，影响主循环
+
+**临时方案**：
+- 禁用 LogPanel 和 ToggleButton（Inspector 中取消 Active）
+- 恢复 TransportManager.cs 的 Debug.Log 输出到 Console
+
+**相关文件**：
+- `Assets/Scripts/UI/LogPanel.cs`（已禁用）
+- `Assets/Scripts/Communication/TransportManager.cs`（恢复 Debug.Log）
+
+#### 三、归位功能修复（✅ 已完成）
+
+**问题**：Home 按钮点击后，Slider 归位但机械臂和角度值不归位
+
+**原因**：
+- HomeButton 的 HomingCoroutine 调用 SetJointAngles()
+- 触发滑块的 onValueChanged 事件
+- OnSliderChanged 中调用 StopAllCoroutines()
+- 归位协程被中断
+
+**修复**：
+1. 添加 `suppressEvents` 标志位
+2. 新增 `SetJointAnglesDirect()` 方法（直接更新，不触发事件）
+3. HomeButton 改用 SetJointAnglesDirect()
+
+**相关文件**：
+- `Assets/Scripts/UI/JointControlPanel.cs`
+- `Assets/Scripts/UI/HomeButton.cs`
+
+#### 四、Console 输出恢复
+
+TransportManager.cs 添加 Debug.Log 输出：
+- `[连接] {address}`
+- `[断开] 已断开连接`
+- `[发送] {command}`
+
+CollisionGuard.cs 已有 Debug.Log（通过 debugLog 开关控制）
+
+#### 五、中文字体安装（待做）
+
+**步骤**：
+1. 复制字体文件（如 C:\Windows\Fonts\msyh.ttc）到 Assets/Fonts/
+2. Window → TextMeshPro → Font Asset Creator
+3. Source Font: msyh.ttc
+4. Character Set: Unicode Range (Hex) → 3000-9FFF
+5. Generate Font Atlas → Save as "ChineseFont"
+6. TextMeshPro 组件中 Font 设置为 ChineseFont
+
+---
+
+### 2026/06/16  xuzhihao-248
+
+**类型**：代码
+
+**内容**：T-G 任务完成——Slider 子级高亮
+
+**原因**：拖动关节滑块时，直观显示哪些部件会随之运动
+
+**相关文件**：`Assets/Scripts/UI/JointHighlighter.cs`、`Assets/Scripts/UI/JointControlPanel.cs`
+
+#### 完成功能
+
+1. **JointHighlighter 模块**：独立的关节高亮模块
+2. **高亮方式**：Emission（自发光），整体发光效果
+3. **高亮范围**：拖动 J1 → J1~J6 全部高亮；拖动 J3 → J3~J6；基座不高亮
+4. **高亮时机**：滑块按下时高亮，松开时消失
+
+#### 实现细节
+
+**JointHighlighter.cs**：
+- 预创建高亮材质（避免运行时频繁创建）
+- `HighlightFromJoint(int jointIndex)`：高亮指定关节及所有子级
+- `ClearHighlight()`：清除所有高亮，恢复原始材质
+- 使用 Dictionary 缓存原始材质和高亮材质
+
+**JointControlPanel.cs**：
+- 添加 `jointHighlighter` 引用
+- 为每个滑块添加 EventTrigger（OnPointerDown/OnPointerUp）
+- OnPointerDown 调用 `HighlightFromJoint(index)`
+- OnPointerUp 调用 `ClearHighlight()`
+
+#### Unity 编辑器操作
+
+1. 创建空 GameObject，命名 "JointHighlighter"
+2. Add Component → JointHighlighter
+3. 拖拽引用：Joints → J1~J6 的 ArticulationBody
+4. JointControlPanel 中自动查找 JointHighlighter（或手动拖拽）
+
+#### 可调参数
+
+| 参数 | 默认值 | 说明 |
+|------|--------|------|
+| Highlight Color | 黄色 (1,1,0,0.3) | 高亮颜色 |
+| Emission Intensity | 2 | 发光强度 |
+
+#### 尝试过的方案（失败）
+
+1. ❌ 描边 Shader（Custom/OutlineShader）→ URP 中不生效
+2. ❌ 双 Pass 渲染（Cull Front）→ 材质错误，品红色
+
+**结论**：URP 中实现描边效果需要专用插件（如 Highlighting System），当前使用 Emission 发光作为替代方案。
+
+---
+
+### 2026/06/16  xuzhihao-248
+
+**类型**：代码
+
+**内容**：T-H 任务开始——外部配置文档
+
+**原因**：将散落在各脚本中的参数提取到外部 JSON 文件，方便打包后修改和其他程序读写
+
+**相关文件**：待创建
+
+#### 计划实现
+
+1. **文件位置**：`StreamingAssets/config.json`（打包后可访问可修改）
+2. **格式**：JSON（Unity 原生支持 JsonUtility）
+3. **配置结构**：
+   - joints：关节限位（min/max/type）
+   - drive：驱动参数（stiffness/damping/forceLimit）
+   - collision：碰撞检测参数（groundY/safetyMargin/endEffectorOffset）
+   - ui：UI 参数（maxDelta/homeDuration/syncInterval）
+   - scene：场景参数（backgroundColor/gridSize/gridSpacing）
+   - communication：通信参数（port/baudRate/timeout）
+
+4. **ConfigManager 单例**：启动时加载配置，各脚本从中读取参数
+
+#### 待完成
+
+- [ ] 创建 ConfigManager.cs
+- [ ] 创建 config.json 模板
+- [ ] 修改各脚本从 ConfigManager 读取参数
+
+---
+
+### 2026/06/16  xuzhihao-248
+
+**类型**：代码
+
+**内容**：T-H 任务完成——外部配置文档
+
+**原因**：将散落在各脚本中的参数提取到外部 JSON 文件，方便打包后修改和其他程序读写
+
+**相关文件**：
+- `Assets/Scripts/Config/ConfigManager.cs`（新建）
+- `Assets/StreamingAssets/config.json`（新建）
+- `Assets/Scripts/UI/JointControlPanel.cs`（修改）
+- `Assets/Scripts/UI/JointInitializer.cs`（修改）
+- `Assets/Scripts/Safety/CollisionGuard.cs`（修改）
+- `Assets/Scripts/Sync/PoseSync.cs`（修改）
+- `Assets/Scripts/UI/HomeButton.cs`（修改）
+- `Assets/Scripts/Scene/DarkGridSetup.cs`（修改）
+
+#### 完成功能
+
+1. **ConfigManager 单例**：启动时加载 `StreamingAssets/config.json`，文件不存在则创建默认配置
+2. **配置数据结构**：完整的 JSON 结构，包含所有可调参数
+3. **各脚本读取配置**：启动时从 ConfigManager 加载参数
+
+#### 配置结构
+
+```json
+{
+    "joints": { "j1": { "min": -360, "max": 360, "type": "continuous" }, ... },
+    "drive": { "stiffness": 100, "damping": 20, "forceLimit": 20, "driveType": "Force" },
+    "collision": { "groundY": 0, "safetyMargin": 0.02, "enableCollisionCheck": true, "endEffectorOffset": { "x": 0, "y": 0, "z": 0 } },
+    "ui": { "maxDelta": 10, "homeDuration": 1.5, "syncInterval": 0.1 },
+    "scene": { "backgroundColor": { "r": 0.15, "g": 0.15, "b": 0.15 }, "gridSize": 10, "gridSpacing": 1, "gridColor": { "r": 0.35, "g": 0.35, "b": 0.35 } },
+    "communication": { "port": "SIMULATED", "baudRate": 115200, "timeout": 1.0 }
+}
+```
+
+#### Unity 编辑器操作
+
+1. 创建空 GameObject，命名 "ConfigManager"
+2. Add Component → ConfigManager
+3. 运行时自动生成 `Assets/StreamingAssets/config.json`
+
+#### 验收结果
+
+- ✅ 修改 config.json 中的参数，重启 Unity 后生效
+- ✅ 删除 config.json 后，程序使用默认值正常运行
+- ✅ 各脚本不再硬编码参数，统一从 ConfigManager 读取
+- ✅ 打包后 config.json 可被外部程序修改
+
+---
+
+### 2026/06/16  xuzhihao-248
+
+**类型**：代码
+
+**内容**：T-I 任务评估——关节移动逻辑改造
+
+**原因**：当前滑块速度 = 关节速度，后续硬件通信可能有问题
+
+#### 评估结果
+
+**现状**：
+- 滑块位置 = 关节目标位置
+- 滑块移动多快，关节就移动多快
+- 物理引擎（Force 模式）直接追赶滑块值
+
+**问题**：
+- 快速拖动滑块 → 大量指令堆积
+- 硬件通信速率有限（CAN 100Hz）
+- 无法控制运动平滑性
+
+#### 方案对比
+
+| 方案 | 原理 | 优点 | 缺点 | 难度 |
+|------|------|------|------|------|
+| A. 速度限制 | 滑块为目标值，关节以固定速率追赶 | 简单，改动小 | 有延迟感 | ⭐⭐ |
+| B. 指令节流 | 限制发送频率（如 10Hz） | 简单，不影响本地控制 | 硬件收到的不是最新值 | ⭐ |
+| C. 插值平滑 | 起点→终点插值，每帧发中间点 | 运动平滑 | 计算量大 | ⭐⭐⭐ |
+| D. 硬件端限速 | 硬件自己控制速率 | 上位机简单 | 需要改固件 | ⭐⭐ |
+
+#### 推荐方案：A + B 组合
+
+1. **本地控制**：滑块 → 物理引擎（保持现有，实时响应）
+2. **通信层**：添加指令队列 + 速率限制（如每 100ms 发送一次）
+3. **滑块作为目标值**：关节以固定速率追赶滑块（可选）
+
+**难度**：⭐⭐（中等）
+
+**结论**：当前阶段（仿真）不改，保持现状。接入硬件时实现方案 A+B。
+
+---
