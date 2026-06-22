@@ -1808,3 +1808,67 @@ CollisionGuard.cs 已有 Debug.Log（通过 debugLog 开关控制）
 **结论**：当前阶段（仿真）不改，保持现状。接入硬件时实现方案 A+B。
 
 ---
+
+### 2026/06/22  xuzhihao-248
+
+**类型**：硬件
+
+**内容**：MotorDriver-42 驱动板焊接完成，SWD 接口识别，待解决供电问题
+
+**原因**：验证焊接质量和烧录连接
+
+#### 一、焊接进度
+
+- ✅ MotorDriver-42 驱动板 ×1 焊接完成
+- ✅ ST-Link V2 烧录器已准备
+- ⬜ 24V 电源未采购（当前阻塞项）
+
+#### 二、接口识别（踩坑记录）
+
+**问题**：KiCad 版本的接口命名与原版 Altium 不同
+
+| 原版 (Altium) | KiCad 版本 | 实际功能 |
+|---------------|-----------|---------|
+| J1 | P1 | 电源（VIN/GND） |
+| J2 | P2 | CAN 总线 |
+| J3 | P3 | **SWD 调试接口（Dbg）** |
+| J4 | P4 | 编码器（MT6816） |
+| J5 | P5 | UART 串口（ADC/2V5/GND/Tx/Rx） |
+
+**关键发现**：
+- **P3 (Dbg)** 才是 SWD 烧录接口，丝印标注为 `GND / Clk / Dio`
+- **P5** 是 UART 串口，丝印标注为 `ADC / 2V5 / GND / Tx / Rx`（不是 SWD）
+
+#### 三、SWD 接线方式
+
+```
+ST-Link V2              P3 (Dbg)
+─────────               ──────────
+  SWDIO   ──────────────  Dio
+  SWCLK   ──────────────  Clk
+  GND     ──────────────  GND
+```
+
+#### 四、测试结果
+
+| 测试项 | 结果 | 说明 |
+|--------|------|------|
+| ST-Link 驱动 | ✅ 正常 | 设备管理器识别 COM3 |
+| SWD 连接 | ❌ No target found | 板子未上电 |
+| 原因分析 | 板子无 24V 供电 | ST-Link 3.3V 无法单独供电 |
+
+#### 五、下一步
+
+1. **采购 24V 电源**（开关电源 24V/10A）
+2. **接 24V 到 P1**（VIN+/GND-）
+3. **重新测试 SWD 连接**
+4. **烧录固件 HEX**
+5. **验证 WS2812B 状态灯**
+
+#### 六、相关文件
+
+- 原理图：`my/selfHardWarePCB/MotorDriver/42motorDriver/Motor-42.kicad_sch`
+- PCB：`my/selfHardWarePCB/MotorDriver/42motorDriver/Motor-42.kicad_pcb`
+- 固件 HEX：`raw/dummy/zhihui原版/Dummy-Robot-main/Firmware/_Released HEX/Ctrl-Step-Driver-STM32F1-fw.hex`
+
+---
