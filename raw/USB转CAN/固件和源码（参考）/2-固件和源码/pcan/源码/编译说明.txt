@@ -1,0 +1,45 @@
+
+(1) 解压安装编译器：gcc-arm-none-eabi-5_4-2016q2-20160622-linux.tar.bz2
+
+     设置编译器生效：
+
+	export PATH=/home/yangjing/opt/tools/gcc-arm-none-eabi-5_4-2016q2/bin:$PATH
+
+(2) 确认 cmake 版本大于 3.13版本：
+
+	cmake --version
+
+     不大于 3.13版本时，参考  linux下cmake安装.txt 来安装
+
+(3) candleLight 源码编译：
+
+	# tar xvf candleLight_fw.tar.bz2
+
+	# cd candleLight_fw
+
+	# mkdir build
+
+	# cd build
+
+	# cmake .. -DCMAKE_TOOLCHAIN_FILE=../cmake/gcc-arm-none-eabi-8-2019-q3-update.cmake
+
+	# make
+
+	编译完之后，可看到镜像：candleLight_fw\build\candleLight_fw.bin
+
+	可以使用 DFU 工具把 candleLight_fw.bin 文件转为 ：candleLight_fw.dfu 便于烧录
+
+
+(4)  pcan 源码编译
+
+	使用跟 candleLight 一样的编译器，设置好编译器路径生效后，进入源码目录，直接：
+	
+	# tar xvf pcan_cantact.tar.bz2
+
+	# cd pcan_cantact
+
+	# make 
+
+	编译完得到：pcan_canable_hw.bin    pcan_canable_hw.hex
+
+ 
