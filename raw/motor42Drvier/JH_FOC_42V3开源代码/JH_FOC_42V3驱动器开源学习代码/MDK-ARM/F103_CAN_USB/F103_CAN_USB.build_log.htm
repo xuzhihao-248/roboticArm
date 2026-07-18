@@ -1,0 +1,213 @@
+<html>
+<body>
+<pre>
+<h1>礦ision Build Log</h1>
+<h2>Tool Versions:</h2>
+IDE-Version: μVision V5.39.0.0
+Copyright (C) 2023 ARM Ltd and ARM Germany GmbH. All rights reserved.
+License Information: yi olivoer, jhinstrument, LIC=UJWP0-BDRR4-DYNV3-ARNVY-FN80Q-48A0X
+ 
+Tool Versions:
+Toolchain:       MDK-ARM Plus  Version: 5.39.0.0
+Toolchain Path:  E:\Keil_v5\ARM\ARMCC\Bin
+C Compiler:      Armcc.exe V5.06 update 1 (build 61)
+Assembler:       Armasm.exe V5.06 update 1 (build 61)
+Linker/Locator:  ArmLink.exe V5.06 update 1 (build 61)
+Library Manager: ArmAr.exe V5.06 update 1 (build 61)
+Hex Converter:   FromElf.exe V5.06 update 1 (build 61)
+CPU DLL:         SARMCM3.DLL V5.39.0.0
+Dialog DLL:      DCM.DLL V1.17.5.0
+Target DLL:      CMSIS_AGDI.dll V1.33.16.0
+Dialog DLL:      TCM.DLL V1.56.4.0
+ 
+<h2>Project:</h2>
+D:\stm32cubmx_project\RZ7899_MS_JH_FOC_42_V3_CAN开源代码\MDK-ARM\F103_CAN_USB.uvprojx
+Project File Date:  06/27/2026
+
+<h2>Output:</h2>
+*** Using Compiler 'V5.06 update 1 (build 61)', folder: 'E:\Keil_v5\ARM\ARMCC\Bin'
+Build target 'F103_CAN_USB'
+compiling filter.c...
+compiling float_char.c...
+compiling adc_task.c...
+compiling adc.c...
+compiling myflash.c...
+compiling mos_set.c...
+compiling Position_foc.c...
+compiling B_motor_foc.c...
+compiling MT6816.c...
+compiling main.c...
+compiling PID.c...
+compiling connecting.c...
+connecting.c(523): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  			if(strncmp(message_rx [0],"JH0",3)==0)////?卸?????头?欠???确
+connecting.c(528): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  					 if(strncmp(message_rx[1],"Mode",4)==0)
+connecting.c(530): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  					   if(strncmp(message_rx[2],"IDLE",4)==0)
+connecting.c(538): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+               else if(strncmp(message_rx[2],"Current",7)==0&&connect_crt .motor_mode !=1)	
+connecting.c(550): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  					   else if(strncmp(message_rx[2],"Speed",5)==0&&(connect_crt .motor_mode !=1||connect_crt .drive_current ==0)&&connect_crt .motor_mode !=2)	//???骰?模式?虏???直???谢?
+connecting.c(562): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  					   else if(strncmp(message_rx[2],"Pos",3)==0&&(connect_crt .motor_mode !=1||connect_crt .drive_current ==0)&&connect_crt .motor_mode !=3)	
+connecting.c(594): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  					   else if(strncmp(message_rx[2],"Angle",5)==0&&(connect_crt .motor_mode !=1||connect_crt .drive_current ==0))	
+connecting.c(612): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  				 	else if(strncmp(message_rx[1],"SetCurr",7)==0)//???玫缁??鞯???值
+connecting.c(614): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  							  connect_crt .drive_current= atof(message_rx[2]);
+connecting.c(632): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+            	else if(strncmp(message_rx[1],"Speed",7)==0)
+connecting.c(635): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  							   connect_crt .speed =atof(message_rx[2]);
+connecting.c(649): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  						else if(strncmp(message_rx[1],"SAcc",4)==0)
+connecting.c(652): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  							   connect_crt .s_acc =fabs (atof(message_rx[2]));	
+connecting.c(660): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+              else if(strncmp(message_rx[1],"Posinit",7)==0)//???玫缁?位?没??俣炔???
+connecting.c(663): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  							   connect_crt .max_speed  =fabs(atof(message_rx[2]));
+connecting.c(664): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  								 connect_crt .accel =fabs (atof(message_rx[3]));
+connecting.c(665): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  								 connect_crt .decel =fabs (atof(message_rx[4]));
+connecting.c(679): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+              else if(strncmp(message_rx[1],"RPos",4)==0)	//位?没??喽??硕嵌?????
+connecting.c(683): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  										float delta = atof(message_rx[2]);
+connecting.c(701): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  						else if(strncmp(message_rx[1],"APos",4)==0)//位?没肪越嵌??硕?
+connecting.c(705): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  											float target_pos = atof(message_rx[2]);
+connecting.c(721): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  						else if(strncmp(message_rx[1],"PZero",5)==0)//???玫?前位??为位?没??愕?
+connecting.c(739): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  					  else if(strncmp(message_rx[1],"Reset",5)==0)//复位???愕?
+connecting.c(772): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  						else if(strncmp(message_rx[1],"Angle",5)==0)//???玫?前位??为位?没??愕?
+connecting.c(776): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  									connect_crt .distance =atof(message_rx[2]);
+connecting.c(784): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  						else if(strncmp(message_rx[1],"AZero",5)==0)
+connecting.c(798): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  				   else if(strncmp(message_rx[1],"Adjust",6)==0)
+connecting.c(813): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  					 else if(strncmp(message_rx[1],"STOP",4)==0)
+connecting.c(820): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  					 else if(strncmp(message_rx[1],"RESETMCU",8)==0)//????
+connecting.c(834): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  					 else if(strncmp(message_rx[1],"PIDfactor",9)==0)//????PID????
+connecting.c(836): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  						  PID_factor =atof(message_rx[2]);
+connecting.c(847): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  					 else if(strncmp(message_rx[1],"ConfigSTS",9)==0)//?????系??欠??舳??俣然凡???
+connecting.c(853): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  						  save_data [3] =atoi(message_rx[2]);
+connecting.c(854): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  						  save_data [4]=atoi(message_rx[3]);
+connecting.c(855): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  						  int32_t p=atoi(message_rx[4]);if(p>3000)p=3000;else if(p<-3000)p=-3000;
+connecting.c(857): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+                save_data [6]=abs(atoi(message_rx[5]));
+connecting.c(858): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+                save_data [7]=fabs(atof(message_rx[6]))*100	;					 
+connecting.c(859): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  						  save_data [8]=abs(atoi(message_rx [7]));
+connecting.c(866): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  					else if(strncmp(message_rx[1],"ConfigSTP",9)==0)//?????系??欠??舳?位?没凡???
+connecting.c(872): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  						  save_data [11] =atoi(message_rx[2]);
+connecting.c(873): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  						  apos=atof(message_rx[3])*100;		
+connecting.c(875): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  						  apos=atof(message_rx[4])*100;
+connecting.c(877): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+                save_data [14]=abs(atoi(message_rx[5]));
+connecting.c(878): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+                save_data [15]=abs(atoi(message_rx[6]))	;					 
+connecting.c(879): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  						  save_data [16]=fabs(atof(message_rx [7]))*100;
+connecting.c(880): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  						  save_data [17]=abs(atoi(message_rx [8]));
+connecting.c(881): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  							save_data [18]=atoi(message_rx[9]);
+connecting.c(886): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  					 else if(strncmp(message_rx[1],"ConfigWK",8)==0)//
+connecting.c(888): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  						  save_data [9] =abs(atoi(message_rx[2]));
+connecting.c(889): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  						  save_data [10]=abs(atoi(message_rx[3]));
+connecting.c(894): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  					 else if(strncmp(message_rx[1],"Gmode",6)==0)//??取当前模式
+connecting.c(902): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  						else if(strncmp(message_rx[1],"Gspeed",6)==0)//??取?俣?
+connecting.c(910): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  						else if(strncmp(message_rx[1],"Gpos",4)==0)//??取位??
+connecting.c(919): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  						else if(strncmp(message_rx[1],"Gtemp",5)==0)//??取?露?
+connecting.c(927): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  						else if(strncmp(message_rx[1],"Gangle",6)==0)//??取?嵌?
+connecting.c(935): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  						else if(strncmp(message_rx[1],"Gvol",4)==0)//??取??压
+connecting.c(943): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  				    else if(strncmp(message_rx[1],"Gtorque",7)==0)//??取当前扭??
+connecting.c(951): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  						else if(strncmp(message_rx[1],"StartRD",7)==0)//开???莼卮?
+connecting.c(955): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  								return_HZ = atoi(message_rx[2]);//??取?卮?频??
+connecting.c(960): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  						else if(strncmp(message_rx[1],"StopRD",6)==0)
+connecting.c(965): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  						else if(strncmp(message_rx[1],"Gencoder",8)==0)//??取??????值
+connecting.c(973): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  					 else if(strncmp(message_rx[1],"Gcanid",6)==0)
+connecting.c(980): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  					 else if(strncmp(message_rx[1],"GcanBR",6)==0)
+connecting.c(992): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  					 else if(strncmp(message_rx[1],"Scanid",6)==0)//????CANID
+connecting.c(1007): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  					 else if(strncmp(message_rx[1],"ScanBR",6)==0)//????CAN波????
+connecting.c(1010): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  						 if(strncmp(message_rx[2],"1Mbps",5)==0)
+connecting.c(1014): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  						 else if(strncmp(message_rx[2],"500kbps",7)==0)
+connecting.c(1018): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  						 else if(strncmp(message_rx[2],"250kbps",7)==0)
+connecting.c(1022): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  						 else if(strncmp(message_rx[2],"125kbps",7)==0)
+connecting.c(1026): warning:  #167-D: argument of type "uint8_t *" is incompatible with parameter of type "const char *"
+  						 	else if(strncmp(message_rx[2],"50kbps",6)==0)
+connecting.c: 70 warnings, 0 errors
+linking...
+Program Size: Code=56834 RO-data=786 RW-data=4752 ZI-data=10008  
+FromELF: creating hex file...
+"F103_CAN_USB\F103_CAN_USB.axf" - 0 Error(s), 70 Warning(s).
+
+<h2>Software Packages used:</h2>
+
+Package Vendor: ARM
+                http://www.keil.com/pack/ARM.CMSIS.5.9.0.pack
+                ARM::CMSIS@5.9.0
+                CMSIS (Common Microcontroller Software Interface Standard)
+   * Component: CORE Version: 5.6.0
+
+Package Vendor: Keil
+                https://www.keil.com/pack/Keil.STM32F1xx_DFP.2.4.1.pack
+                Keil::STM32F1xx_DFP@2.4.1
+                STMicroelectronics STM32F1 Series Device Support, Drivers and Examples
+
+<h2>Collection of Component include folders:</h2>
+  ./RTE/_F103_CAN_USB
+  E:/Keil_v5/ARM/Pack/ARM/CMSIS/5.9.0/CMSIS/Core/Include
+  E:/Keil_v5/ARM/Pack/Keil/STM32F1xx_DFP/2.4.1/Device/Include
+
+<h2>Collection of Component Files used:</h2>
+
+   * Component: ARM::CMSIS:CORE@5.6.0
+      Include file:  CMSIS/Core/Include/tz_context.h
+Build Time Elapsed:  00:00:07
+</pre>
+</body>
+</html>

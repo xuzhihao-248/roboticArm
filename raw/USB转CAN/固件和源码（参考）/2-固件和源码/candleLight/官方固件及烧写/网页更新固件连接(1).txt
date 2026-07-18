@@ -1,0 +1,11 @@
+固件地址： https://canable.io/updater/canable1.html
+
+先安装驱动：ImpulseRC_Driver_Fixer.exe
+
+然后打开上面的链接：https://canable.io/updater/canable1.html
+
+之后，选择图片： candleLight_fw.png    里面圈的固件。
+
+板子的BOOT0接上跳帽，上电，点击网页上的： Conect and Update 来烧录
+
+注意：官方的candleLight固件，发送和接收指示灯不会亮，请知悉！！！！！
